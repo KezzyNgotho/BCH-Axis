@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { FaCogs, FaGlobe, FaChartPie, FaTwitter, FaLinkedin, FaGithub, FaEnvelope, FaPhone } from "react-icons/fa";
 
 import MerchantOverlay from './MerchantOnboard';
+import MerchantDashboard from './MerchantDashboard';
 // import ConnectWallet from '../components/ConnectWallet';
 import WalletModal from "../components/walletmodal";
 import { useWallet } from "../context/walletprovider";
@@ -24,6 +25,8 @@ export default function LandingPage() {
   const [activeService, setActiveService] = useState(null);
   const [merchantOpen, setMerchantOpen] = useState(false);
   const [walletConnected, setWalletConnected] = useState(false);
+  const [showDashboard, setShowDashboard] = useState(false);
+  const [merchant, setMerchant] = useState(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,10 +39,32 @@ export default function LandingPage() {
 
   // Removed useWallet and setModalOpen logic (not needed)
 
+  // Show dashboard if merchant data exists
+  React.useEffect(() => {
+    const data = localStorage.getItem('merchant');
+    if (data) {
+      setMerchant(JSON.parse(data));
+      setShowDashboard(true);
+      setMerchantOpen(false);
+    }
+  }, [merchantOpen]);
+
   const handleLaunchDashboard = () => {
-    setMerchantOpen(true); // open your merchant overlay
+    // If merchant data exists, show dashboard, else open onboarding
+    const data = localStorage.getItem('merchant');
+    if (data) {
+      setMerchant(JSON.parse(data));
+      setShowDashboard(true);
+      setMerchantOpen(false);
+    } else {
+      setMerchantOpen(true);
+    }
   };
 
+
+  if (showDashboard && merchant) {
+    return <MerchantDashboard merchant={merchant} />;
+  }
 
   return (
     <div style={styles.page}>

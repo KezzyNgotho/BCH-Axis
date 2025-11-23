@@ -103,6 +103,24 @@ export default function MerchantOverlay({ isOpen, onClose }) {
       // Pass correct arguments: (ownerSig, merchantWallet, merchantDataHex)
       const result = await onboardMerchant(ownerSig, walletAddress, merchantDataHex);
       setTxid(result?.txid || JSON.stringify(result));
+      // Save merchant data locally for dashboard access
+      const merchant = {
+        name,
+        businessName: name, // or add a separate field if needed
+        email: businessEmail,
+        website,
+        phone,
+        address,
+        city,
+        state,
+        country,
+        zip,
+        xpub,
+        apiKey: result?.apiKey || 'demo-api-key',
+        kycApproved,
+        txid: result?.txid || '',
+      };
+      localStorage.setItem('merchant', JSON.stringify(merchant));
       setStep(4); // Success
     } catch (err) {
       setError(err?.message || "Failed to onboard merchant. Please try again.");

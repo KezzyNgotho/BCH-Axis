@@ -1,53 +1,90 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { FaHome, FaUser, FaWallet, FaChartLine, FaBell, FaCog, FaSignOutAlt } from "react-icons/fa";
+import logo from "../logo.svg";
 
-export default function MerchantDashboard({ merchant }) {
-  if (!merchant) {
-    return (
-      <div style={{padding: '48px', textAlign: 'center', color: '#888'}}>
-        <h2>Merchant Dashboard</h2>
-        <p>No merchant data available. Please complete onboarding.</p>
-      </div>
-    );
-  }
+export default function MerchantDashboard() {
+  const [merchant, setMerchant] = useState(null);
+  const [activeTab, setActiveTab] = useState("dashboard");
+
+  useEffect(() => {
+    const data = localStorage.getItem("merchant");
+    if (data) setMerchant(JSON.parse(data));
+  }, []);
+
+  if (!merchant) return <p>Loading merchant data...</p>;
+
+  const KPI_CARDS = [
+    { label: "Total Revenue", value: "$0" },
+    { label: "Total Transactions", value: "0" },
+    { label: "Active Invoices", value: "0" },
+    { label: "KYC Status", value: merchant.kycApproved ? "Approved" : "Pending" },
+  ];
+
+  const TABS = [
+    { name: "dashboard", icon: <FaHome />, label: "Dashboard" },
+    { name: "profile", icon: <FaUser />, label: "Profile" },
+    { name: "payments", icon: <FaWallet />, label: "Payments" },
+    { name: "analytics", icon: <FaChartLine />, label: "Analytics" },
+    { name: "notifications", icon: <FaBell />, label: "Notifications" },
+    { name: "settings", icon: <FaCog />, label: "Settings" },
+  ];
 
   return (
-    <div style={{maxWidth: '900px', margin: '48px auto', background: '#fff', borderRadius: '1.5rem', boxShadow: '0 8px 40px rgba(0,0,0,0.10)', padding: '2.5rem', fontFamily: 'Inter, system-ui, sans-serif'}}>
-      <h2 style={{fontSize: 32, fontWeight: 800, color: '#1D546C', marginBottom: 12}}>Merchant Portal</h2>
-      <div style={{marginBottom: 32, color: '#3EA76A', fontWeight: 600}}>
-        <span>Status: </span>
-        {merchant.kycApproved ? (
-          <span style={{color: '#3EA76A'}}>KYC Approved</span>
-        ) : (
-          <span style={{color: '#d32f2f'}}>KYC Pending</span>
+    <div className="flex min-h-screen font-sans bg-gray-100">
+      {/* Sidebar */}
+      <aside className="w-64 bg-white shadow-lg p-6 flex flex-col">
+        <img src={logo} alt="Logo" className="h-12 mb-6 mx-auto" />
+        <div className="flex-1">
+          {TABS.map((tab) => (
+            <div
+              key={tab.name}
+              className={`flex items-center space-x-3 mb-4 p-2 rounded cursor-pointer hover:bg-green-50 ${
+                activeTab === tab.name ? "bg-green-100 font-bold" : ""
+              }`}
+              onClick={() => setActiveTab(tab.name)}
+            >
+              {tab.icon} <span>{tab.label}</span>
+            </div>
+          ))}
+        </div>
+        <div className="flex items-center space-x-3 mt-6 cursor-pointer hover:text-red-600">
+          <FaSignOutAlt /> <span>Logout</span>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <main className="flex-1 p-8">
+        <h1 className="text-3xl font-bold text-green-900 mb-6">
+          Welcome, {merchant.name}
+        </h1>
+
+        {activeTab === "dashboard" && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {KPI_CARDS.map((card) => (
+              <div key={card.label} className="bg-white p-6 rounded-xl shadow text-center">
+                <div className="text-2xl font-bold text-green-600">{card.value}</div>
+                <div className="mt-2 font-semibold text-gray-700">{card.label}</div>
+              </div>
+            ))}
+          </div>
         )}
-      </div>
-      <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', marginBottom: 32}}>
-        <div>
-          <h4 style={{fontWeight: 700, color: '#164a58'}}>Merchant Name</h4>
-          <p style={{fontSize: 18}}>{merchant.name}</p>
-        </div>
-        <div>
-          <h4 style={{fontWeight: 700, color: '#164a58'}}>Business Name</h4>
-          <p style={{fontSize: 18}}>{merchant.businessName}</p>
-        </div>
-        <div>
-          <h4 style={{fontWeight: 700, color: '#164a58'}}>Email</h4>
-          <p style={{fontSize: 18}}>{merchant.email}</p>
-        </div>
-        <div>
-          <h4 style={{fontWeight: 700, color: '#164a58'}}>Wallet (XPUB)</h4>
-          <p style={{fontSize: 18, wordBreak: 'break-all'}}>{merchant.xpub}</p>
-        </div>
-      </div>
-      <div style={{marginBottom: 32}}>
-        <h4 style={{fontWeight: 700, color: '#164a58'}}>API Key</h4>
-        <div style={{background: '#EAF6F8', borderRadius: 10, padding: '18px', fontSize: 18, fontWeight: 700, color: '#3EA76A', wordBreak: 'break-all'}}>
-          {merchant.apiKey}
-        </div>
-      </div>
-      <div style={{marginTop: 32, textAlign: 'center'}}>
-        <button style={{padding: '14px 36px', borderRadius: 10, background: '#3EA76A', color: '#fff', fontWeight: 700, fontSize: 18, cursor: 'pointer', border: 'none', boxShadow: '0 2px 8px rgba(62,167,106,0.10)'}}>Copy API Key</button>
-      </div>
+
+        {activeTab === "profile" && (
+          <div className="bg-white p-6 rounded-xl shadow space-y-4">
+            <h2 className="text-xl font-bold mb-4">Profile Info</h2>
+            <p><strong>Merchant Name:</strong> {merchant.name}</p>
+            <p><strong>Business Name:</strong> {merchant.businessName}</p>
+            <p><strong>Email:</strong> {merchant.email}</p>
+            <p><strong>Wallet:</strong> {merchant.xpub}</p>
+            <p><strong>API Key:</strong> {merchant.apiKey}</p>
+          </div>
+        )}
+
+        {activeTab === "payments" && <div>Payments & Payouts Section</div>}
+        {activeTab === "analytics" && <div>Analytics & Charts Section</div>}
+        {activeTab === "notifications" && <div>Notifications Section</div>}
+        {activeTab === "settings" && <div>Settings & API Section</div>}
+      </main>
     </div>
   );
 }
