@@ -1,0 +1,139 @@
+{
+  "contractName": "LiquidityBuffer",
+  "constructorInputs": [
+    {
+      "name": "manager",
+      "type": "pubkey"
+    },
+    {
+      "name": "minReserveSats",
+      "type": "int"
+    },
+    {
+      "name": "minerFeeSats",
+      "type": "int"
+    }
+  ],
+  "abi": [
+    {
+      "name": "topUp",
+      "inputs": [
+        {
+          "name": "managerSig",
+          "type": "sig"
+        },
+        {
+          "name": "source",
+          "type": "pubkey"
+        },
+        {
+          "name": "amountSats",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "payout",
+      "inputs": [
+        {
+          "name": "managerSig",
+          "type": "sig"
+        },
+        {
+          "name": "recipient",
+          "type": "pubkey"
+        },
+        {
+          "name": "amountSats",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "receiveFunds",
+      "inputs": []
+    }
+  ],
+  "bytecode": "OP_3 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_4 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_3 OP_PICK OP_GREATERTHAN OP_VERIFY OP_ROT OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUALVERIFY OP_0 OP_OUTPUTVALUE OP_NUMEQUALVERIFY OP_2 OP_PICK OP_3 OP_ROLL OP_EQUALVERIFY OP_2 OP_PICK OP_3 OP_ROLL OP_NUMEQUAL OP_NIP OP_NIP OP_ELSE OP_3 OP_PICK OP_1 OP_NUMEQUAL OP_IF OP_4 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_3 OP_PICK OP_GREATERTHAN OP_VERIFY OP_ROT OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_0 OP_OUTPUTVALUE OP_5 OP_PICK OP_NUMEQUALVERIFY OP_DUP OP_5 OP_PICK OP_NUMEQUAL OP_IF OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUALVERIFY OP_ELSE OP_TXOUTPUTCOUNT OP_2 OP_NUMEQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_ACTIVEBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTVALUE OP_OVER OP_6 OP_PICK OP_SUB OP_NUMEQUALVERIFY OP_ENDIF OP_3 OP_PICK OP_4 OP_ROLL OP_EQUALVERIFY OP_2DROP OP_2DROP OP_1 OP_ELSE OP_3 OP_ROLL OP_2 OP_NUMEQUALVERIFY OP_1 OP_VERIFY OP_OVER OP_ROT OP_NUMEQUAL OP_NIP OP_NIP OP_ENDIF OP_ENDIF",
+  "source": "pragma cashscript ^0.12.0;\n\n/*\n  LiquidityBuffer.cash\n  - Purpose: maintain a small reserve to allow instant merchant payouts while final settlement completes.\n  - Constructor:\n      pubkey manager,      // app-managed key to refill/withdraw\n      int minReserveSats,  // target minimum reserve\n      int minerFeeSats\n  - Functions:\n      topUp(sig managerSig, pubkey source, int amountSats)   // manager moves funds into buffer\n      payout(sig managerSig, pubkey recipient, int amountSats) // manager pays merchant from buffer\n      autoRefill(pubkey refillSource) // optional pattern where refill is done off-chain\n      receiveFunds()\n  - Behavior:\n      enforce sum(outputs) == inputVal - minerFeeSats\n*/\n\ncontract LiquidityBuffer(pubkey manager, int minReserveSats, int minerFeeSats) {\n\n  function topUp(sig managerSig, pubkey source, int amountSats) {\n    require(checkSig(managerSig, manager));\n\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    // For topUp we require a single output equal to distributable (avoid loops unsupported by compiler)\n    require(tx.outputs.length == 1);\n    require(tx.outputs[0].value == distributable);\n    // reference source to avoid unused-variable error\n    require(source == source);\n    require(amountSats == amountSats);\n  }\n\n  function payout(sig managerSig, pubkey recipient, int amountSats) {\n    require(checkSig(managerSig, manager));\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    require(tx.outputs.length >= 1);\n    require(tx.outputs[0].value == amountSats);\n\n    // Either single output equal distributable (no change) or recipient + change back to this contract\n    if (distributable == amountSats) {\n      require(tx.outputs.length == 1);\n    } else {\n      require(tx.outputs.length == 2);\n      require(tx.outputs[1].lockingBytecode == this.activeBytecode);\n      require(tx.outputs[1].value == distributable - amountSats);\n    }\n    // reference recipient param to avoid unused-variable warning\n    require(recipient == recipient);\n  }\n\n  function receiveFunds() {\n    // accept deposits into liquidity buffer\n    require(true);\n    // reference minReserveSats to avoid unused-variable warning\n    require(minReserveSats == minReserveSats);\n  }\n}\n",
+  "debug": {
+    "bytecode": "5379009c63547a7cadc0c6765379a0697b94c4519d00cc9d5279537a885279537a9c7777675379519c63547a7cadc0c6765379a0697b94c451a26900cc55799d7655799c63c4519d67c4529d51cdc18851cc785679949d685379547a886d6d5167537a529d5169787b9c77776868",
+    "sourceMap": "21:2:34:3;;;;;22:21:22:31;;:33::40;:4::43:1;24:29:24:50:0;:19::57:1;25:12:25:20:0;:23::35;;:12:::1;:4::37;26:35:26:47:0;:24:::1;29:12:29:29:0;:33::34;:4::36:1;30:23:30:24:0;:12::31:1;:4::50;32:12:32:18:0;;:22::28;;:4::30:1;33:12:33:22:0;;:26::36;;:4::38:1;21:2:34:3;;;36::55::0;;;;;37:21:37:31;;:33::40;:4::43:1;38:29:38:50:0;:19::57:1;39:12:39:20:0;:23::35;;:12:::1;:4::37;40:35:40:47:0;:24:::1;42:12:42:29:0;:33::34;:12:::1;:4::36;43:23:43:24:0;:12::31:1;:35::45:0;;:4::47:1;46:8:46:21:0;:25::35;;:8:::1;:37:48:5:0;47:14:47:31;:35::36;:6::38:1;48:11:52:5:0;49:14:49:31;:35::36;:6::38:1;50:25:50:26:0;:14::43:1;:47::66:0;:6::68:1;51:25:51:26:0;:14::33:1;:37::50:0;:53::63;;:37:::1;:6::65;48:11:52:5;54:12:54:21:0;;:25::34;;:4::36:1;36:2:55:3;;;;57::62::0;;;;59:12:59:16;:4::18:1;61:12:61:26:0;:30::44;:4::46:1;57:2:62:3;;19:0:63:1;",
+    "logs": [],
+    "requires": [
+      {
+        "ip": 11,
+        "line": 22
+      },
+      {
+        "ip": 18,
+        "line": 25
+      },
+      {
+        "ip": 23,
+        "line": 29
+      },
+      {
+        "ip": 26,
+        "line": 30
+      },
+      {
+        "ip": 31,
+        "line": 32
+      },
+      {
+        "ip": 37,
+        "line": 33
+      },
+      {
+        "ip": 48,
+        "line": 37
+      },
+      {
+        "ip": 55,
+        "line": 39
+      },
+      {
+        "ip": 61,
+        "line": 42
+      },
+      {
+        "ip": 66,
+        "line": 43
+      },
+      {
+        "ip": 74,
+        "line": 47
+      },
+      {
+        "ip": 78,
+        "line": 49
+      },
+      {
+        "ip": 82,
+        "line": 50
+      },
+      {
+        "ip": 89,
+        "line": 51
+      },
+      {
+        "ip": 95,
+        "line": 54
+      },
+      {
+        "ip": 105,
+        "line": 59
+      },
+      {
+        "ip": 109,
+        "line": 61
+      }
+    ]
+  },
+  "compiler": {
+    "name": "cashc",
+    "version": "0.12.0"
+  },
+  "updatedAt": "2025-11-22T11:03:31.107Z"
+}

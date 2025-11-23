@@ -1,0 +1,91 @@
+{
+  "contractName": "MerchantRegistry",
+  "constructorInputs": [
+    {
+      "name": "owner",
+      "type": "pubkey"
+    }
+  ],
+  "abi": [
+    {
+      "name": "registerMerchant",
+      "inputs": [
+        {
+          "name": "ownerSig",
+          "type": "sig"
+        },
+        {
+          "name": "merchantWallet",
+          "type": "pubkey"
+        },
+        {
+          "name": "merchantData",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "approveKYC",
+      "inputs": [
+        {
+          "name": "ownerSig",
+          "type": "sig"
+        },
+        {
+          "name": "merchantWallet",
+          "type": "pubkey"
+        },
+        {
+          "name": "kycData",
+          "type": "bytes"
+        }
+      ]
+    }
+  ],
+  "bytecode": "OP_OVER OP_0 OP_NUMEQUAL OP_IF OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_OVER OP_ROT OP_EQUALVERIFY OP_OVER OP_ROT OP_EQUALVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_NIP OP_ELSE OP_SWAP OP_1 OP_NUMEQUALVERIFY OP_CHECKSIGVERIFY OP_DUP OP_EQUALVERIFY OP_DUP OP_EQUALVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_ENDIF",
+  "source": "pragma cashscript ^0.12.0;\n\ncontract MerchantRegistry(pubkey owner) {\n    function registerMerchant(sig ownerSig, pubkey merchantWallet, bytes merchantData) {\n        require(checkSig(ownerSig, owner));\n        // Reference merchantWallet and merchantData to avoid unused variable warnings\n        require(merchantWallet == merchantWallet);\n        require(merchantData == merchantData);\n        require(tx.outputs.length >= 1);\n    }\n\n    function approveKYC(sig ownerSig, pubkey merchantWallet, bytes kycData) {\n        require(checkSig(ownerSig, owner));\n        // Reference merchantWallet and kycData to avoid unused variable warnings\n        require(merchantWallet == merchantWallet);\n        require(kycData == kycData);\n        require(tx.outputs.length >= 1);\n    }\n}",
+  "debug": {
+    "bytecode": "78009c637b7cad787b88787b88c451a277677c519dad76887688c451a268",
+    "sourceMap": "4:4:10:5;;;;5:25:5:33;:35::40;:8::43:1;7:16:7:30:0;:34::48;:8::50:1;8:16:8:28:0;:32::44;:8::46:1;9:16:9:33:0;:37::38;:8::40:1;4:4:10:5;;12::18::0;;;13:8:13:43:1;15:16:15:48:0;:8::50:1;16:16:16:34:0;:8::36:1;17:16:17:33:0;:37::38;:8::40:1;3:0:19:1",
+    "logs": [],
+    "requires": [
+      {
+        "ip": 7,
+        "line": 5
+      },
+      {
+        "ip": 10,
+        "line": 7
+      },
+      {
+        "ip": 13,
+        "line": 8
+      },
+      {
+        "ip": 17,
+        "line": 9
+      },
+      {
+        "ip": 22,
+        "line": 13
+      },
+      {
+        "ip": 24,
+        "line": 15
+      },
+      {
+        "ip": 26,
+        "line": 16
+      },
+      {
+        "ip": 30,
+        "line": 17
+      }
+    ]
+  },
+  "compiler": {
+    "name": "cashc",
+    "version": "0.12.0"
+  },
+  "updatedAt": "2025-11-23T04:30:17.623Z"
+}

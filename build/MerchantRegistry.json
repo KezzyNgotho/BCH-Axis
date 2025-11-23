@@ -1,0 +1,91 @@
+{
+  "contractName": "MerchantRegistry",
+  "constructorInputs": [
+    {
+      "name": "owner",
+      "type": "pubkey"
+    }
+  ],
+  "abi": [
+    {
+      "name": "registerMerchant",
+      "inputs": [
+        {
+          "name": "ownerSig",
+          "type": "sig"
+        },
+        {
+          "name": "merchantWallet",
+          "type": "pubkey"
+        },
+        {
+          "name": "merchantData",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "approveKYC",
+      "inputs": [
+        {
+          "name": "ownerSig",
+          "type": "sig"
+        },
+        {
+          "name": "merchantWallet",
+          "type": "pubkey"
+        },
+        {
+          "name": "kycData",
+          "type": "bytes"
+        }
+      ]
+    }
+  ],
+  "bytecode": "OP_OVER OP_0 OP_NUMEQUAL OP_IF OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_OVER OP_ROT OP_EQUALVERIFY OP_OVER OP_ROT OP_EQUAL OP_NIP OP_ELSE OP_SWAP OP_1 OP_NUMEQUALVERIFY OP_CHECKSIGVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_DUP OP_EQUALVERIFY OP_DUP OP_EQUAL OP_ENDIF",
+  "source": "pragma cashscript ^0.12.0;\n\n/*\n  MerchantRegistry Contract (CashScript compatible)\n  - Handles merchant onboarding via OP_RETURN\n  - Owner can approve KYC by signing a transaction\n  - All merchant data is stored off-chain or in OP_RETURN\n*/\n\ncontract MerchantRegistry(pubkey owner) {\n\n  // Register merchant: backend should add OP_RETURN with merchant data\n  function registerMerchant(sig ownerSig, pubkey merchantWallet, bytes merchantData) {\n    require(checkSig(ownerSig, owner));\n    // Require at least one output (OP_RETURN with merchantData)\n    require(tx.outputs.length >= 1);\n    // Optionally: check that merchantWallet is referenced in merchantData\n    require(merchantWallet == merchantWallet);\n    require(merchantData == merchantData);\n  }\n\n  // Approve KYC: backend should add OP_RETURN with KYC approval data\n  function approveKYC(sig ownerSig, pubkey merchantWallet, bytes kycData) {\n    require(checkSig(ownerSig, owner));\n    require(tx.outputs.length >= 1);\n    require(merchantWallet == merchantWallet);\n    require(kycData == kycData);\n  }\n}",
+  "debug": {
+    "bytecode": "78009c637b7cadc451a269787b88787b8777677c519dadc451a2697688768768",
+    "sourceMap": "13:2:20:3;;;;14:21:14:29;:31::36;:4::39:1;16:12:16:29:0;:33::34;:12:::1;:4::36;18:12:18:26:0;:30::44;:4::46:1;19:12:19:24:0;:28::40;:4::42:1;13:2:20:3;;23::28::0;;;24:4:24:39:1;25:12:25:29:0;:33::34;:12:::1;:4::36;26:12:26:44:0;:4::46:1;27:12:27:30:0;:4::32:1;10:0:29:1",
+    "logs": [],
+    "requires": [
+      {
+        "ip": 7,
+        "line": 14
+      },
+      {
+        "ip": 11,
+        "line": 16
+      },
+      {
+        "ip": 14,
+        "line": 18
+      },
+      {
+        "ip": 18,
+        "line": 19
+      },
+      {
+        "ip": 23,
+        "line": 24
+      },
+      {
+        "ip": 27,
+        "line": 25
+      },
+      {
+        "ip": 29,
+        "line": 26
+      },
+      {
+        "ip": 32,
+        "line": 27
+      }
+    ]
+  },
+  "compiler": {
+    "name": "cashc",
+    "version": "0.12.0"
+  },
+  "updatedAt": "2025-11-22T19:40:01.896Z"
+}

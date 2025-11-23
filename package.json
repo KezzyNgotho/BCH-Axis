@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "cashscript": "^0.12.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "@psf/bch-js": "^6.8.3",
+    "bitcore-mnemonic": "^10.10.7",
+    "crypto-browserify": "^3.12.1",
+    "dotenv": "^17.2.3",
+    "mainnet-js": "^2.7.31",
+    "paybutton": "^0.2.1"
+  }
+}

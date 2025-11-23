@@ -1,0 +1,91 @@
+{
+  "contractName": "KYCRegistry",
+  "constructorInputs": [
+    {
+      "name": "verifier",
+      "type": "pubkey"
+    }
+  ],
+  "abi": [
+    {
+      "name": "attest",
+      "inputs": [
+        {
+          "name": "verifierSig",
+          "type": "sig"
+        },
+        {
+          "name": "subjectHash",
+          "type": "bytes"
+        },
+        {
+          "name": "meta",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "revoke",
+      "inputs": [
+        {
+          "name": "verifierSig",
+          "type": "sig"
+        },
+        {
+          "name": "subjectHash",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "receiveFunds",
+      "inputs": []
+    }
+  ],
+  "bytecode": "OP_OVER OP_0 OP_NUMEQUAL OP_IF OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_OVER OP_ROT OP_EQUALVERIFY OP_OVER OP_ROT OP_EQUAL OP_NIP OP_ELSE OP_OVER OP_1 OP_NUMEQUAL OP_IF OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_OVER OP_ROT OP_EQUAL OP_NIP OP_ELSE OP_SWAP OP_2 OP_NUMEQUALVERIFY OP_DROP OP_1 OP_ENDIF OP_ENDIF",
+  "source": "pragma cashscript ^0.12.0;\n\n/*\n  KYCRegistry.cash\n  - Purpose: store short attestations (hash) signed by an authorized verifier\n  - Constructor:\n      pubkey verifier    // authority that may attest businesses\n  - Functions:\n      attest(sig verifierSig, bytes32 subjectHash, bytes meta)  // meta small bytes (optional)\n      revoke(sig verifierSig, bytes32 subjectHash)\n      verify(bytes32 subjectHash) returns(bool)  // Not a contract function to call in tx; used conceptually off-chain via indexer scanning\n  Notes:\n    - CashScript doesn't persist arbitrary storage — this contract pattern is used to create an on-chain attestation UTXO:\n      When `attest` is called, the backend must create an output (OP_RETURN or small P2PKH) with subjectHash/meta.\n    - For simplicity we enforce verifierSig for attestation and require a particular output pattern (output[0] OP_RETURN simulated by requiring a non-zero zero-value output is not possible in CashScript),\n      so this contract will require that one of the outputs equal 0 and include attestation as part of TX metadata in your system.\n    - Practical pattern: use an external indexer that watches transactions signed by `verifier` with OP_RETURN containing `subjectHash|meta`.\n*/\n\ncontract KYCRegistry(pubkey verifier) {\n\n  // Attestation: requires verifier signature. Backend should add OP_RETURN with subjectHash|meta.\n  function attest(sig verifierSig, bytes subjectHash, bytes meta) {\n    require(checkSig(verifierSig, verifier));\n    // We rely on off-chain indexer to inspect OP_RETURN included in the transaction.\n    // Optionally ensure tx.outputs.length >= 1 (attestation output present)\n    require(tx.outputs.length >= 1);\n    // reference subjectHash/meta to avoid unused-variable warnings\n    require(subjectHash == subjectHash);\n    require(meta == meta);\n  }\n\n  // Revoke attestation (signed by verifier)\n  function revoke(sig verifierSig, bytes subjectHash) {\n    require(checkSig(verifierSig, verifier));\n    require(tx.outputs.length >= 1);\n    require(subjectHash == subjectHash);\n  }\n\n  function receiveFunds() {\n    // accept small deposits for gas if needed\n    require(true);\n  }\n}\n",
+  "debug": {
+    "bytecode": "78009c637b7cadc451a269787b88787b87776778519c637b7cadc451a269787b8777677c529d75516868",
+    "sourceMap": "23:2:31:3;;;;24:21:24:32;:34::42;:4::45:1;27:12:27:29:0;:33::34;:12:::1;:4::36;29:12:29:23:0;:27::38;:4::40:1;30:12:30:16:0;:20::24;:4::26:1;23:2:31:3;;34::38::0;;;;35:21:35:32;:34::42;:4::45:1;36:12:36:29:0;:33::34;:12:::1;:4::36;37:12:37:23:0;:27::38;:4::40:1;34:2:38:3;;40::43::0;;;::::1;;20:0:44:1;",
+    "logs": [],
+    "requires": [
+      {
+        "ip": 7,
+        "line": 24
+      },
+      {
+        "ip": 11,
+        "line": 27
+      },
+      {
+        "ip": 14,
+        "line": 29
+      },
+      {
+        "ip": 18,
+        "line": 30
+      },
+      {
+        "ip": 26,
+        "line": 35
+      },
+      {
+        "ip": 30,
+        "line": 36
+      },
+      {
+        "ip": 34,
+        "line": 37
+      },
+      {
+        "ip": 40,
+        "line": 42
+      }
+    ]
+  },
+  "compiler": {
+    "name": "cashc",
+    "version": "0.12.0"
+  },
+  "updatedAt": "2025-11-22T11:03:30.437Z"
+}

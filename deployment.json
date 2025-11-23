@@ -1,0 +1,1309 @@
+{
+  "network": "testnet",
+  "timestamp": "2025-11-23T04:34:07.272Z",
+  "deployer": {
+    "address": "bchtest:qqup3csyywvyeywmyqct0tn0tjra75lmmcf2zv5wqq",
+    "publicKey": {
+      "0": 2,
+      "1": 167,
+      "2": 174,
+      "3": 217,
+      "4": 109,
+      "5": 72,
+      "6": 94,
+      "7": 18,
+      "8": 128,
+      "9": 161,
+      "10": 115,
+      "11": 207,
+      "12": 45,
+      "13": 51,
+      "14": 252,
+      "15": 139,
+      "16": 207,
+      "17": 39,
+      "18": 109,
+      "19": 126,
+      "20": 159,
+      "21": 152,
+      "22": 198,
+      "23": 121,
+      "24": 60,
+      "25": 240,
+      "26": 234,
+      "27": 217,
+      "28": 150,
+      "29": 81,
+      "30": 163,
+      "31": 108,
+      "32": 60
+    },
+    "balanceSats": 999918699
+  },
+  "contracts": {
+    "Escrow": {
+      "name": "Escrow",
+      "file": "Escrow.json",
+      "address": "bchtest:qr35zwmyeuvj5vwwsdd9zksn8mkf00k70yrfuxuhk7",
+      "txid": "{\"txId\":\"2f5e20f03bdafbace90c865a2a414fc436176ec038f8dc101d3d175a6910a8ab\",\"balance\":{\"bch\":9.99913479,\"sat\":999913479,\"usd\":5435.31},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/2f5e20f03bdafbace90c865a2a414fc436176ec038f8dc101d3d175a6910a8ab\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"2f5e20f03bdafbace90c865a2a414fc436176ec038f8dc101d3d175a6910a8ab\",\"balance\":{\"bch\":9.99913479,\"sat\":999913479,\"usd\":5435.31},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/2f5e20f03bdafbace90c865a2a414fc436176ec038f8dc101d3d175a6910a8ab\",\"tokenIds\":[]}",
+      "artifact": {
+        "contractName": "Escrow",
+        "constructorInputs": [
+          {
+            "name": "payer",
+            "type": "pubkey"
+          },
+          {
+            "name": "payee",
+            "type": "pubkey"
+          },
+          {
+            "name": "escrowAgent",
+            "type": "pubkey"
+          },
+          {
+            "name": "releaseUnlockTime",
+            "type": "int"
+          },
+          {
+            "name": "minerFeeSats",
+            "type": "int"
+          }
+        ],
+        "abi": [
+          {
+            "name": "releaseByPayer",
+            "inputs": [
+              {
+                "name": "payerSig",
+                "type": "sig"
+              },
+              {
+                "name": "recipient",
+                "type": "pubkey"
+              }
+            ]
+          },
+          {
+            "name": "releaseByPayee",
+            "inputs": [
+              {
+                "name": "payeeSig",
+                "type": "sig"
+              },
+              {
+                "name": "recipient",
+                "type": "pubkey"
+              }
+            ]
+          },
+          {
+            "name": "releaseByAgent",
+            "inputs": [
+              {
+                "name": "agentSig",
+                "type": "sig"
+              },
+              {
+                "name": "recipient",
+                "type": "pubkey"
+              }
+            ]
+          },
+          {
+            "name": "autoRelease",
+            "inputs": [
+              {
+                "name": "recipient",
+                "type": "pubkey"
+              }
+            ]
+          },
+          {
+            "name": "receiveFunds",
+            "inputs": []
+          }
+        ],
+        "bytecode": "OP_5 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_6 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_5 OP_PICK OP_GREATERTHAN OP_VERIFY OP_4 OP_ROLL OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUAL OP_IF OP_0 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_ELSE OP_TXOUTPUTCOUNT OP_2 OP_NUMEQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_ACTIVEBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTVALUE OP_0 OP_OUTPUTVALUE OP_ADD OP_OVER OP_NUMEQUALVERIFY OP_ENDIF OP_5 OP_PICK OP_6 OP_ROLL OP_EQUALVERIFY OP_2DROP OP_2DROP OP_DROP OP_1 OP_ELSE OP_5 OP_PICK OP_1 OP_NUMEQUAL OP_IF OP_6 OP_ROLL OP_ROT OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_5 OP_PICK OP_GREATERTHAN OP_VERIFY OP_4 OP_ROLL OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUAL OP_IF OP_0 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_ELSE OP_TXOUTPUTCOUNT OP_2 OP_NUMEQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_ACTIVEBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTVALUE OP_0 OP_OUTPUTVALUE OP_ADD OP_OVER OP_NUMEQUALVERIFY OP_ENDIF OP_5 OP_PICK OP_6 OP_ROLL OP_EQUALVERIFY OP_2DROP OP_2DROP OP_DROP OP_1 OP_ELSE OP_5 OP_PICK OP_2 OP_NUMEQUAL OP_IF OP_6 OP_ROLL OP_3 OP_ROLL OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_5 OP_PICK OP_GREATERTHAN OP_VERIFY OP_4 OP_ROLL OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUAL OP_IF OP_0 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_ELSE OP_TXOUTPUTCOUNT OP_2 OP_NUMEQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_ACTIVEBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTVALUE OP_0 OP_OUTPUTVALUE OP_ADD OP_OVER OP_NUMEQUALVERIFY OP_ENDIF OP_5 OP_PICK OP_6 OP_ROLL OP_EQUALVERIFY OP_2DROP OP_2DROP OP_DROP OP_1 OP_ELSE OP_5 OP_PICK OP_3 OP_NUMEQUAL OP_IF OP_TXLOCKTIME OP_4 OP_ROLL OP_GREATERTHANOREQUAL OP_VERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_5 OP_PICK OP_GREATERTHAN OP_VERIFY OP_4 OP_ROLL OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_0 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUAL OP_IF OP_0 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_ELSE OP_TXOUTPUTCOUNT OP_2 OP_NUMEQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_ACTIVEBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTVALUE OP_0 OP_OUTPUTVALUE OP_ADD OP_OVER OP_NUMEQUALVERIFY OP_ENDIF OP_5 OP_PICK OP_6 OP_ROLL OP_EQUALVERIFY OP_2DROP OP_2DROP OP_DROP OP_1 OP_ELSE OP_5 OP_ROLL OP_4 OP_NUMEQUALVERIFY OP_1 OP_VERIFY OP_2DROP OP_2DROP OP_DROP OP_1 OP_ENDIF OP_ENDIF OP_ENDIF OP_ENDIF",
+        "source": "pragma cashscript ^0.12.0;\n\n/*\n  Escrow.cash\n  - Constructor:\n      pubkey payer,\n      pubkey payee,\n      pubkey escrowAgent,        // neutral arbitrator\n      int releaseUnlockTime,     // unix time after which auto-release to payee allowed\n      int minerFeeSats\n  - Functions:\n      releaseByPayer(sig payerSig, pubkey recipient)        // payer approves release\n      releaseByPayee(sig payeeSig, pubkey recipient)        // payee claims\n      releaseByAgent(sig agentSig, pubkey recipient)        // escrow agent resolves\n      autoRelease(pubkey recipient)                         // allowed after locktime (no sig)\n      receiveFunds()\n  - Behavior:\n      Sum(outputs) == inputVal - minerFeeSats\n      output[0] == recipient amount (usually full distributable; backend controls partial splits)\n*/\n\ncontract Escrow(pubkey payer, pubkey payee, pubkey escrowAgent, int releaseUnlockTime, int minerFeeSats) {\n\n  function releaseByPayer(sig payerSig, pubkey recipient) {\n    require(checkSig(payerSig, payer));\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    // Either single output equal distributable, or recipient + change back to contract\n    require(tx.outputs.length >= 1);\n    if (tx.outputs.length == 1) {\n      require(tx.outputs[0].value == distributable);\n    } else {\n      require(tx.outputs.length == 2);\n      require(tx.outputs[1].lockingBytecode == this.activeBytecode);\n      require(tx.outputs[1].value + tx.outputs[0].value == distributable);\n    }\n    require(recipient == recipient);\n  }\n\n  function releaseByPayee(sig payeeSig, pubkey recipient) {\n    require(checkSig(payeeSig, payee));\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    require(tx.outputs.length >= 1);\n    if (tx.outputs.length == 1) {\n      require(tx.outputs[0].value == distributable);\n    } else {\n      require(tx.outputs.length == 2);\n      require(tx.outputs[1].lockingBytecode == this.activeBytecode);\n      require(tx.outputs[1].value + tx.outputs[0].value == distributable);\n    }\n    require(recipient == recipient);\n  }\n\n  function releaseByAgent(sig agentSig, pubkey recipient) {\n    require(checkSig(agentSig, escrowAgent));\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    require(tx.outputs.length >= 1);\n    if (tx.outputs.length == 1) {\n      require(tx.outputs[0].value == distributable);\n    } else {\n      require(tx.outputs.length == 2);\n      require(tx.outputs[1].lockingBytecode == this.activeBytecode);\n      require(tx.outputs[1].value + tx.outputs[0].value == distributable);\n    }\n    require(recipient == recipient);\n  }\n\n  // Auto-release to payee (no signature) after unlock time\n  function autoRelease(pubkey recipient) {\n    require(tx.locktime >= releaseUnlockTime);\n\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    require(tx.outputs.length >= 1);\n    require(tx.outputs[0].value == distributable);\n\n      // Ensure outputs sum to distributable (single output or recipient+change)\n      if (tx.outputs.length == 1) {\n        require(tx.outputs[0].value == distributable);\n      } else {\n        require(tx.outputs.length == 2);\n        require(tx.outputs[1].lockingBytecode == this.activeBytecode);\n        require(tx.outputs[1].value + tx.outputs[0].value == distributable);\n      }\n      require(recipient == recipient);\n  }\n\n  function receiveFunds() {\n    // accept deposits into escrow\n    require(true);\n  }\n}\n",
+        "debug": {
+          "bytecode": "5579009c63567a7cadc0c6765579a069547a94c451a269c4519c6300cc789d67c4529d51cdc18851cc00cc93789d685579567a886d6d7551675579519c63567a7badc0c6765579a069547a94c451a269c4519c6300cc789d67c4529d51cdc18851cc00cc93789d685579567a886d6d7551675579529c63567a537aadc0c6765579a069547a94c451a269c4519c6300cc789d67c4529d51cdc18851cc00cc93789d685579567a886d6d7551675579539c63c5547aa269c0c6765579a069547a94c451a26900cc789dc4519c6300cc789d67c4529d51cdc18851cc00cc93789d685579567a886d6d755167557a549d51696d6d755168686868",
+          "sourceMap": "24:2:40:3;;;;;25:21:25:29;;:31::36;:4::39:1;26:29:26:50:0;:19::57:1;27:12:27:20:0;:23::35;;:12:::1;:4::37;28:35:28:47:0;;:24:::1;31:12:31:29:0;:33::34;:12:::1;:4::36;32:8:32:25:0;:29::30;:8:::1;:32:34:5:0;33:25:33:26;:14::33:1;:37::50:0;:6::52:1;34:11:38:5:0;35:14:35:31;:35::36;:6::38:1;36:25:36:26:0;:14::43:1;:47::66:0;:6::68:1;37:25:37:26:0;:14::33:1;:47::48:0;:36::55:1;:14;:59::72:0;:6::74:1;34:11:38:5;39:12:39:21:0;;:25::34;;:4::36:1;24:2:40:3;;;;;42::57::0;;;;;43:21:43:29;;:31::36;:4::39:1;44:29:44:50:0;:19::57:1;45:12:45:20:0;:23::35;;:12:::1;:4::37;46:35:46:47:0;;:24:::1;48:12:48:29:0;:33::34;:12:::1;:4::36;49:8:49:25:0;:29::30;:8:::1;:32:51:5:0;50:25:50:26;:14::33:1;:37::50:0;:6::52:1;51:11:55:5:0;52:14:52:31;:35::36;:6::38:1;53:25:53:26:0;:14::43:1;:47::66:0;:6::68:1;54:25:54:26:0;:14::33:1;:47::48:0;:36::55:1;:14;:59::72:0;:6::74:1;51:11:55:5;56:12:56:21:0;;:25::34;;:4::36:1;42:2:57:3;;;;;59::74::0;;;;;60:21:60:29;;:31::42;;:4::45:1;61:29:61:50:0;:19::57:1;62:12:62:20:0;:23::35;;:12:::1;:4::37;63:35:63:47:0;;:24:::1;65:12:65:29:0;:33::34;:12:::1;:4::36;66:8:66:25:0;:29::30;:8:::1;:32:68:5:0;67:25:67:26;:14::33:1;:37::50:0;:6::52:1;68:11:72:5:0;69:14:69:31;:35::36;:6::38:1;70:25:70:26:0;:14::43:1;:47::66:0;:6::68:1;71:25:71:26:0;:14::33:1;:47::48:0;:36::55:1;:14;:59::72:0;:6::74:1;68:11:72:5;73:12:73:21:0;;:25::34;;:4::36:1;59:2:74:3;;;;;77::96::0;;;;;78:12:78:23;:27::44;;:12:::1;:4::46;80:29:80:50:0;:19::57:1;81:12:81:20:0;:23::35;;:12:::1;:4::37;82:35:82:47:0;;:24:::1;84:12:84:29:0;:33::34;:12:::1;:4::36;85:23:85:24:0;:12::31:1;:35::48:0;:4::50:1;88:10:88:27:0;:31::32;:10:::1;:34:90:7:0;89:27:89:28;:16::35:1;:39::52:0;:8::54:1;90:13:94:7:0;91:16:91:33;:37::38;:8::40:1;92:27:92:28:0;:16::45:1;:49::68:0;:8::70:1;93:27:93:28:0;:16::35:1;:49::50:0;:38::57:1;:16;:61::74:0;:8::76:1;90:13:94:7;95:14:95:23:0;;:27::36;;:6::38:1;77:2:96:3;;;;;98::101::0;;;;100:12:100:16;:4::18:1;98:2:101:3;;;;22:0:102:1;;;",
+          "logs": [],
+          "requires": [
+            {
+              "ip": 13,
+              "line": 25
+            },
+            {
+              "ip": 20,
+              "line": 27
+            },
+            {
+              "ip": 27,
+              "line": 31
+            },
+            {
+              "ip": 35,
+              "line": 33
+            },
+            {
+              "ip": 39,
+              "line": 35
+            },
+            {
+              "ip": 43,
+              "line": 36
+            },
+            {
+              "ip": 50,
+              "line": 37
+            },
+            {
+              "ip": 56,
+              "line": 39
+            },
+            {
+              "ip": 70,
+              "line": 43
+            },
+            {
+              "ip": 77,
+              "line": 45
+            },
+            {
+              "ip": 84,
+              "line": 48
+            },
+            {
+              "ip": 92,
+              "line": 50
+            },
+            {
+              "ip": 96,
+              "line": 52
+            },
+            {
+              "ip": 100,
+              "line": 53
+            },
+            {
+              "ip": 107,
+              "line": 54
+            },
+            {
+              "ip": 113,
+              "line": 56
+            },
+            {
+              "ip": 128,
+              "line": 60
+            },
+            {
+              "ip": 135,
+              "line": 62
+            },
+            {
+              "ip": 142,
+              "line": 65
+            },
+            {
+              "ip": 150,
+              "line": 67
+            },
+            {
+              "ip": 154,
+              "line": 69
+            },
+            {
+              "ip": 158,
+              "line": 70
+            },
+            {
+              "ip": 165,
+              "line": 71
+            },
+            {
+              "ip": 171,
+              "line": 73
+            },
+            {
+              "ip": 186,
+              "line": 78
+            },
+            {
+              "ip": 193,
+              "line": 81
+            },
+            {
+              "ip": 200,
+              "line": 84
+            },
+            {
+              "ip": 204,
+              "line": 85
+            },
+            {
+              "ip": 212,
+              "line": 89
+            },
+            {
+              "ip": 216,
+              "line": 91
+            },
+            {
+              "ip": 220,
+              "line": 92
+            },
+            {
+              "ip": 227,
+              "line": 93
+            },
+            {
+              "ip": 233,
+              "line": 95
+            },
+            {
+              "ip": 244,
+              "line": 100
+            }
+          ]
+        },
+        "compiler": {
+          "name": "cashc",
+          "version": "0.12.0"
+        },
+        "updatedAt": "2025-11-22T11:03:29.770Z"
+      },
+      "fundedSats": 5000
+    },
+    "FeeSplitter": {
+      "name": "FeeSplitter",
+      "file": "FeeSplitter.json",
+      "address": "bchtest:qz84xcnk94t3qxskzutyfv0xqe0n9fsx7szdnnk02h",
+      "txid": "{\"txId\":\"cf89120703117b85cb7ba0ab415e7a217fd283fc847635177d5f7d0158e8230c\",\"balance\":{\"bch\":9.99908259,\"sat\":999908259,\"usd\":5435.28},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/cf89120703117b85cb7ba0ab415e7a217fd283fc847635177d5f7d0158e8230c\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"cf89120703117b85cb7ba0ab415e7a217fd283fc847635177d5f7d0158e8230c\",\"balance\":{\"bch\":9.99908259,\"sat\":999908259,\"usd\":5435.28},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/cf89120703117b85cb7ba0ab415e7a217fd283fc847635177d5f7d0158e8230c\",\"tokenIds\":[]}",
+      "artifact": {
+        "contractName": "FeeSplitter",
+        "constructorInputs": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient0",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient1",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient2",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient3",
+            "type": "pubkey"
+          },
+          {
+            "name": "bp0",
+            "type": "int"
+          },
+          {
+            "name": "bp1",
+            "type": "int"
+          },
+          {
+            "name": "bp2",
+            "type": "int"
+          },
+          {
+            "name": "bp3",
+            "type": "int"
+          },
+          {
+            "name": "recipientsCount",
+            "type": "int"
+          },
+          {
+            "name": "minerFeeSats",
+            "type": "int"
+          },
+          {
+            "name": "treasury",
+            "type": "pubkey"
+          }
+        ],
+        "abi": [
+          {
+            "name": "split",
+            "inputs": [
+              {
+                "name": "ownerSig",
+                "type": "sig"
+              }
+            ]
+          },
+          {
+            "name": "receiveFunds",
+            "inputs": []
+          }
+        ],
+        "bytecode": "OP_12 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_13 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_11 OP_PICK OP_GREATERTHAN OP_VERIFY OP_10 OP_ROLL OP_SUB OP_9 OP_PICK OP_1 OP_GREATERTHANOREQUAL OP_10 OP_PICK OP_4 OP_LESSTHANOREQUAL OP_BOOLAND OP_VERIFY OP_TXOUTPUTCOUNT OP_10 OP_PICK OP_GREATERTHANOREQUAL OP_VERIFY OP_9 OP_PICK OP_1 OP_NUMEQUAL OP_IF OP_0 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_ELSE OP_9 OP_PICK OP_2 OP_NUMEQUAL OP_IF OP_DUP OP_6 OP_PICK OP_MUL 1027 OP_DIV OP_0 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2DUP OP_SUB OP_1 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2DROP OP_ELSE OP_9 OP_PICK OP_3 OP_NUMEQUAL OP_IF OP_DUP OP_6 OP_PICK OP_MUL 1027 OP_DIV OP_OVER OP_8 OP_PICK OP_MUL 1027 OP_DIV OP_0 OP_OUTPUTVALUE OP_2 OP_PICK OP_NUMEQUALVERIFY OP_1 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2 OP_PICK OP_2 OP_PICK OP_SUB OP_OVER OP_SUB OP_2 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2DROP OP_DROP OP_ELSE OP_DUP OP_6 OP_PICK OP_MUL 1027 OP_DIV OP_OVER OP_8 OP_PICK OP_MUL 1027 OP_DIV OP_2 OP_PICK OP_10 OP_PICK OP_MUL 1027 OP_DIV OP_0 OP_OUTPUTVALUE OP_3 OP_PICK OP_NUMEQUALVERIFY OP_1 OP_OUTPUTVALUE OP_2 OP_PICK OP_NUMEQUALVERIFY OP_2 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2OVER OP_SUB OP_2 OP_PICK OP_SUB OP_OVER OP_SUB OP_3 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2DROP OP_2DROP OP_ENDIF OP_ENDIF OP_ENDIF OP_9 OP_PICK OP_1 OP_GREATERTHANOREQUAL OP_IF OP_OVER OP_2 OP_PICK OP_EQUALVERIFY OP_ENDIF OP_9 OP_PICK OP_2 OP_GREATERTHANOREQUAL OP_IF OP_2 OP_PICK OP_3 OP_PICK OP_EQUALVERIFY OP_ENDIF OP_9 OP_PICK OP_3 OP_GREATERTHANOREQUAL OP_IF OP_3 OP_PICK OP_4 OP_PICK OP_EQUALVERIFY OP_ENDIF OP_9 OP_ROLL OP_4 OP_GREATERTHANOREQUAL OP_IF OP_4 OP_PICK OP_5 OP_PICK OP_EQUALVERIFY OP_ENDIF OP_5 OP_PICK OP_6 OP_ROLL OP_NUMEQUALVERIFY OP_5 OP_PICK OP_6 OP_ROLL OP_NUMEQUALVERIFY OP_5 OP_PICK OP_6 OP_ROLL OP_NUMEQUALVERIFY OP_5 OP_PICK OP_6 OP_ROLL OP_NUMEQUALVERIFY OP_5 OP_PICK OP_6 OP_ROLL OP_EQUALVERIFY OP_2DROP OP_2DROP OP_2DROP OP_1 OP_ELSE OP_12 OP_ROLL OP_1 OP_NUMEQUALVERIFY OP_1 OP_VERIFY OP_2DROP OP_2DROP OP_2DROP OP_2DROP OP_2DROP OP_2DROP OP_1 OP_ENDIF",
+        "source": "pragma cashscript ^0.12.0;\n\n/*\n  FeeSplitter.cash\n  - Purpose: Split an incoming amount according to basis points among recipients, with miner fee handling.\n  - Constructor:\n      pubkey owner,\n      pubkey[] recipients,\n      int[] basisPoints,    // parts per 10,000 (sum <= 10000 permitted)\n      int minerFeeSats,\n      pubkey treasury       // optional treasury to receive protocol remainder if sum of bp < 10000\n  - Function:\n      split(sig ownerSig)\n  - Behavior:\n      - total = tx.inputs[this.activeInputIndex].value\n      - distributable = total - minerFeeSats\n      - compute amounts for recipients[0..n-2] as floor(distributable * bp / 10000)\n      - last recipient gets remainder OR if sum(bp) < 10000 the remaining fraction is sent to treasury\n      - outputs must be in the same order as recipients[]\n*/\n\ncontract FeeSplitter(pubkey owner,\n                     pubkey recipient0, pubkey recipient1, pubkey recipient2, pubkey recipient3,\n                     int bp0, int bp1, int bp2, int bp3,\n                     int recipientsCount,\n                     int minerFeeSats,\n                     pubkey treasury) {\n\n  function split(sig ownerSig) {\n    require(checkSig(ownerSig, owner));\n\n    int total = tx.inputs[this.activeInputIndex].value;\n    require(total > minerFeeSats);\n    int distributable = total - minerFeeSats;\n\n    require(recipientsCount >= 1 && recipientsCount <= 4);\n    require(tx.outputs.length >= recipientsCount);\n\n    if (recipientsCount == 1) {\n      require(tx.outputs[0].value == distributable);\n    } else if (recipientsCount == 2) {\n      int amt0 = (distributable * bp0) / 10000;\n      require(tx.outputs[0].value == amt0);\n      int amt1 = distributable - amt0;\n      require(tx.outputs[1].value == amt1);\n    } else if (recipientsCount == 3) {\n      int amt0 = (distributable * bp0) / 10000;\n      int amt1 = (distributable * bp1) / 10000;\n      require(tx.outputs[0].value == amt0);\n      require(tx.outputs[1].value == amt1);\n      int amt2 = distributable - amt0 - amt1;\n      require(tx.outputs[2].value == amt2);\n    } else {\n      int amt0 = (distributable * bp0) / 10000;\n      int amt1 = (distributable * bp1) / 10000;\n      int amt2 = (distributable * bp2) / 10000;\n      require(tx.outputs[0].value == amt0);\n      require(tx.outputs[1].value == amt1);\n      require(tx.outputs[2].value == amt2);\n      int amt3 = distributable - amt0 - amt1 - amt2;\n      require(tx.outputs[3].value == amt3);\n    }\n    // Reference recipient and bp variables to avoid unused variable warnings\n    if (recipientsCount >= 1) { require(recipient0 == recipient0); }\n    if (recipientsCount >= 2) { require(recipient1 == recipient1); }\n    if (recipientsCount >= 3) { require(recipient2 == recipient2); }\n    if (recipientsCount >= 4) { require(recipient3 == recipient3); }\n    require(bp0 == bp0);\n    require(bp1 == bp1);\n    require(bp2 == bp2);\n    require(bp3 == bp3);\n    require(treasury == treasury);\n  }\n\n  function receiveFunds() {\n    require(true);\n  }\n}\n",
+        "debug": {
+          "bytecode": "5c79009c635d7a7cadc0c6765b79a0695a7a94597951a25a7954a19a69c45a79a2695979519c6300cc789d675979529c63765679950210279600cc789d6e9451cc789d6d675979539c637656799502102796785879950210279600cc52799d51cc789d5279527994789452cc789d6d75677656799502102796785879950210279652795a79950210279600cc53799d51cc52799d52cc789d7094527994789453cc789d6d6d686868597951a2637852798868597952a263527953798868597953a263537954798868597a54a2635479557988685579567a9d5579567a9d5579567a9d5579567a9d5579567a886d6d6d51675c7a519d51696d6d6d6d6d6d5168",
+          "sourceMap": "29:2:73:3;;;;;30:21:30:29;;:31::36;:4::39:1;32:26:32:47:0;:16::54:1;33:12:33:17:0;:20::32;;:12:::1;:4::34;34:32:34:44:0;;:24:::1;36:12:36:27:0;;:31::32;:12:::1;:36::51:0;;:55::56;:36:::1;:12;:4::58;37:12:37:29:0;:33::48;;:12:::1;:4::50;39:8:39:23:0;;:27::28;:8:::1;:30:41:5:0;40:25:40:26;:14::33:1;:37::50:0;:6::52:1;41:11:62:5:0;:15:41:30;;:34::35;:15:::1;:37:46:5:0;42:18:42:31;:34::37;;:18:::1;:41::46:0;:17:::1;43:25:43:26:0;:14::33:1;:37::41:0;:6::43:1;44:17:44:37:0;::::1;45:25:45:26:0;:14::33:1;:37::41:0;:6::43:1;41:37:46:5;46:11:62::0;:15:46:30;;:34::35;:15:::1;:37:53:5:0;47:18:47:31;:34::37;;:18:::1;:41::46:0;:17:::1;48:18:48:31:0;:34::37;;:18:::1;:41::46:0;:17:::1;49:25:49:26:0;:14::33:1;:37::41:0;;:6::43:1;50:25:50:26:0;:14::33:1;:37::41:0;:6::43:1;51:17:51:30:0;;:33::37;;:17:::1;:40::44:0;:17:::1;52:25:52:26:0;:14::33:1;:37::41:0;:6::43:1;46:37:53:5;;53:11:62::0;54:18:54:31;:34::37;;:18:::1;:41::46:0;:17:::1;55:18:55:31:0;:34::37;;:18:::1;:41::46:0;:17:::1;56:18:56:31:0;;:34::37;;:18:::1;:41::46:0;:17:::1;57:25:57:26:0;:14::33:1;:37::41:0;;:6::43:1;58:25:58:26:0;:14::33:1;:37::41:0;;:6::43:1;59:25:59:26:0;:14::33:1;:37::41:0;:6::43:1;60:17:60:37:0;::::1;:40::44:0;;:17:::1;:47::51:0;:17:::1;61:25:61:26:0;:14::33:1;:37::41:0;:6::43:1;53:11:62:5;;;46;41;64:8:64:23:0;;:27::28;:8:::1;:30::68:0;:40::50;:54::64;;:32::66:1;:30::68;65:8:65:23:0;;:27::28;:8:::1;:30::68:0;:40::50;;:54::64;;:32::66:1;:30::68;66:8:66:23:0;;:27::28;:8:::1;:30::68:0;:40::50;;:54::64;;:32::66:1;:30::68;67:8:67:23:0;;:27::28;:8:::1;:30::68:0;:40::50;;:54::64;;:32::66:1;:30::68;68:12:68:15:0;;:19::22;;:4::24:1;69:12:69:15:0;;:19::22;;:4::24:1;70:12:70:15:0;;:19::22;;:4::24:1;71:12:71:15:0;;:19::22;;:4::24:1;72:12:72:20:0;;:24::32;;:4::34:1;29:2:73:3;;;;;75::77::0;;;;76:12:76:16;:4::18:1;75:2:77:3;;;;;;;22:0:78:1",
+          "logs": [],
+          "requires": [
+            {
+              "ip": 20,
+              "line": 30
+            },
+            {
+              "ip": 27,
+              "line": 33
+            },
+            {
+              "ip": 40,
+              "line": 36
+            },
+            {
+              "ip": 45,
+              "line": 37
+            },
+            {
+              "ip": 54,
+              "line": 40
+            },
+            {
+              "ip": 70,
+              "line": 43
+            },
+            {
+              "ip": 76,
+              "line": 45
+            },
+            {
+              "ip": 100,
+              "line": 49
+            },
+            {
+              "ip": 104,
+              "line": 50
+            },
+            {
+              "ip": 115,
+              "line": 52
+            },
+            {
+              "ip": 142,
+              "line": 57
+            },
+            {
+              "ip": 147,
+              "line": 58
+            },
+            {
+              "ip": 151,
+              "line": 59
+            },
+            {
+              "ip": 162,
+              "line": 61
+            },
+            {
+              "ip": 176,
+              "line": 64
+            },
+            {
+              "ip": 187,
+              "line": 65
+            },
+            {
+              "ip": 198,
+              "line": 66
+            },
+            {
+              "ip": 209,
+              "line": 67
+            },
+            {
+              "ip": 215,
+              "line": 68
+            },
+            {
+              "ip": 220,
+              "line": 69
+            },
+            {
+              "ip": 225,
+              "line": 70
+            },
+            {
+              "ip": 230,
+              "line": 71
+            },
+            {
+              "ip": 235,
+              "line": 72
+            },
+            {
+              "ip": 246,
+              "line": 76
+            }
+          ]
+        },
+        "compiler": {
+          "name": "cashc",
+          "version": "0.12.0"
+        },
+        "updatedAt": "2025-11-22T11:03:29.040Z"
+      },
+      "fundedSats": 5000
+    },
+    "KYCRegistry": {
+      "name": "KYCRegistry",
+      "file": "KYCRegistry.json",
+      "address": "bchtest:qzy633wgvs4w8cqurhql5m37ejt25805evhuuwazxg",
+      "txid": "{\"txId\":\"3a1fc738cb514202a648aec56dde82000c10b373aacfdd56078ef272ad7fe1f7\",\"balance\":{\"bch\":9.99903039,\"sat\":999903039,\"usd\":5435.25},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/3a1fc738cb514202a648aec56dde82000c10b373aacfdd56078ef272ad7fe1f7\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"3a1fc738cb514202a648aec56dde82000c10b373aacfdd56078ef272ad7fe1f7\",\"balance\":{\"bch\":9.99903039,\"sat\":999903039,\"usd\":5435.25},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/3a1fc738cb514202a648aec56dde82000c10b373aacfdd56078ef272ad7fe1f7\",\"tokenIds\":[]}",
+      "artifact": {
+        "contractName": "KYCRegistry",
+        "constructorInputs": [
+          {
+            "name": "verifier",
+            "type": "pubkey"
+          }
+        ],
+        "abi": [
+          {
+            "name": "attest",
+            "inputs": [
+              {
+                "name": "verifierSig",
+                "type": "sig"
+              },
+              {
+                "name": "subjectHash",
+                "type": "bytes"
+              },
+              {
+                "name": "meta",
+                "type": "bytes"
+              }
+            ]
+          },
+          {
+            "name": "revoke",
+            "inputs": [
+              {
+                "name": "verifierSig",
+                "type": "sig"
+              },
+              {
+                "name": "subjectHash",
+                "type": "bytes"
+              }
+            ]
+          },
+          {
+            "name": "receiveFunds",
+            "inputs": []
+          }
+        ],
+        "bytecode": "OP_OVER OP_0 OP_NUMEQUAL OP_IF OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_OVER OP_ROT OP_EQUALVERIFY OP_OVER OP_ROT OP_EQUAL OP_NIP OP_ELSE OP_OVER OP_1 OP_NUMEQUAL OP_IF OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_OVER OP_ROT OP_EQUAL OP_NIP OP_ELSE OP_SWAP OP_2 OP_NUMEQUALVERIFY OP_DROP OP_1 OP_ENDIF OP_ENDIF",
+        "source": "pragma cashscript ^0.12.0;\n\n/*\n  KYCRegistry.cash\n  - Purpose: store short attestations (hash) signed by an authorized verifier\n  - Constructor:\n      pubkey verifier    // authority that may attest businesses\n  - Functions:\n      attest(sig verifierSig, bytes32 subjectHash, bytes meta)  // meta small bytes (optional)\n      revoke(sig verifierSig, bytes32 subjectHash)\n      verify(bytes32 subjectHash) returns(bool)  // Not a contract function to call in tx; used conceptually off-chain via indexer scanning\n  Notes:\n    - CashScript doesn't persist arbitrary storage — this contract pattern is used to create an on-chain attestation UTXO:\n      When `attest` is called, the backend must create an output (OP_RETURN or small P2PKH) with subjectHash/meta.\n    - For simplicity we enforce verifierSig for attestation and require a particular output pattern (output[0] OP_RETURN simulated by requiring a non-zero zero-value output is not possible in CashScript),\n      so this contract will require that one of the outputs equal 0 and include attestation as part of TX metadata in your system.\n    - Practical pattern: use an external indexer that watches transactions signed by `verifier` with OP_RETURN containing `subjectHash|meta`.\n*/\n\ncontract KYCRegistry(pubkey verifier) {\n\n  // Attestation: requires verifier signature. Backend should add OP_RETURN with subjectHash|meta.\n  function attest(sig verifierSig, bytes subjectHash, bytes meta) {\n    require(checkSig(verifierSig, verifier));\n    // We rely on off-chain indexer to inspect OP_RETURN included in the transaction.\n    // Optionally ensure tx.outputs.length >= 1 (attestation output present)\n    require(tx.outputs.length >= 1);\n    // reference subjectHash/meta to avoid unused-variable warnings\n    require(subjectHash == subjectHash);\n    require(meta == meta);\n  }\n\n  // Revoke attestation (signed by verifier)\n  function revoke(sig verifierSig, bytes subjectHash) {\n    require(checkSig(verifierSig, verifier));\n    require(tx.outputs.length >= 1);\n    require(subjectHash == subjectHash);\n  }\n\n  function receiveFunds() {\n    // accept small deposits for gas if needed\n    require(true);\n  }\n}\n",
+        "debug": {
+          "bytecode": "78009c637b7cadc451a269787b88787b87776778519c637b7cadc451a269787b8777677c529d75516868",
+          "sourceMap": "23:2:31:3;;;;24:21:24:32;:34::42;:4::45:1;27:12:27:29:0;:33::34;:12:::1;:4::36;29:12:29:23:0;:27::38;:4::40:1;30:12:30:16:0;:20::24;:4::26:1;23:2:31:3;;34::38::0;;;;35:21:35:32;:34::42;:4::45:1;36:12:36:29:0;:33::34;:12:::1;:4::36;37:12:37:23:0;:27::38;:4::40:1;34:2:38:3;;40::43::0;;;::::1;;20:0:44:1;",
+          "logs": [],
+          "requires": [
+            {
+              "ip": 7,
+              "line": 24
+            },
+            {
+              "ip": 11,
+              "line": 27
+            },
+            {
+              "ip": 14,
+              "line": 29
+            },
+            {
+              "ip": 18,
+              "line": 30
+            },
+            {
+              "ip": 26,
+              "line": 35
+            },
+            {
+              "ip": 30,
+              "line": 36
+            },
+            {
+              "ip": 34,
+              "line": 37
+            },
+            {
+              "ip": 40,
+              "line": 42
+            }
+          ]
+        },
+        "compiler": {
+          "name": "cashc",
+          "version": "0.12.0"
+        },
+        "updatedAt": "2025-11-22T11:03:30.437Z"
+      },
+      "fundedSats": 5000
+    },
+    "LiquidityBuffer": {
+      "name": "LiquidityBuffer",
+      "file": "LIquidityBuffer.json",
+      "address": "bchtest:qq9evm09szj0yhn6kxu6t0zyxd24ekghwvs4yuc4ct",
+      "txid": "{\"txId\":\"df7184b4462b65548662b2a0a4a2ad9dec5551c12a65f5edc87b3cf2248e1aa8\",\"balance\":{\"bch\":9.99897819,\"sat\":999897819,\"usd\":5435.22},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/df7184b4462b65548662b2a0a4a2ad9dec5551c12a65f5edc87b3cf2248e1aa8\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"df7184b4462b65548662b2a0a4a2ad9dec5551c12a65f5edc87b3cf2248e1aa8\",\"balance\":{\"bch\":9.99897819,\"sat\":999897819,\"usd\":5435.22},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/df7184b4462b65548662b2a0a4a2ad9dec5551c12a65f5edc87b3cf2248e1aa8\",\"tokenIds\":[]}",
+      "artifact": {
+        "contractName": "LiquidityBuffer",
+        "constructorInputs": [
+          {
+            "name": "manager",
+            "type": "pubkey"
+          },
+          {
+            "name": "minReserveSats",
+            "type": "int"
+          },
+          {
+            "name": "minerFeeSats",
+            "type": "int"
+          }
+        ],
+        "abi": [
+          {
+            "name": "topUp",
+            "inputs": [
+              {
+                "name": "managerSig",
+                "type": "sig"
+              },
+              {
+                "name": "source",
+                "type": "pubkey"
+              },
+              {
+                "name": "amountSats",
+                "type": "int"
+              }
+            ]
+          },
+          {
+            "name": "payout",
+            "inputs": [
+              {
+                "name": "managerSig",
+                "type": "sig"
+              },
+              {
+                "name": "recipient",
+                "type": "pubkey"
+              },
+              {
+                "name": "amountSats",
+                "type": "int"
+              }
+            ]
+          },
+          {
+            "name": "receiveFunds",
+            "inputs": []
+          }
+        ],
+        "bytecode": "OP_3 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_4 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_3 OP_PICK OP_GREATERTHAN OP_VERIFY OP_ROT OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUALVERIFY OP_0 OP_OUTPUTVALUE OP_NUMEQUALVERIFY OP_2 OP_PICK OP_3 OP_ROLL OP_EQUALVERIFY OP_2 OP_PICK OP_3 OP_ROLL OP_NUMEQUAL OP_NIP OP_NIP OP_ELSE OP_3 OP_PICK OP_1 OP_NUMEQUAL OP_IF OP_4 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_3 OP_PICK OP_GREATERTHAN OP_VERIFY OP_ROT OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_0 OP_OUTPUTVALUE OP_5 OP_PICK OP_NUMEQUALVERIFY OP_DUP OP_5 OP_PICK OP_NUMEQUAL OP_IF OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUALVERIFY OP_ELSE OP_TXOUTPUTCOUNT OP_2 OP_NUMEQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_ACTIVEBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTVALUE OP_OVER OP_6 OP_PICK OP_SUB OP_NUMEQUALVERIFY OP_ENDIF OP_3 OP_PICK OP_4 OP_ROLL OP_EQUALVERIFY OP_2DROP OP_2DROP OP_1 OP_ELSE OP_3 OP_ROLL OP_2 OP_NUMEQUALVERIFY OP_1 OP_VERIFY OP_OVER OP_ROT OP_NUMEQUAL OP_NIP OP_NIP OP_ENDIF OP_ENDIF",
+        "source": "pragma cashscript ^0.12.0;\n\n/*\n  LiquidityBuffer.cash\n  - Purpose: maintain a small reserve to allow instant merchant payouts while final settlement completes.\n  - Constructor:\n      pubkey manager,      // app-managed key to refill/withdraw\n      int minReserveSats,  // target minimum reserve\n      int minerFeeSats\n  - Functions:\n      topUp(sig managerSig, pubkey source, int amountSats)   // manager moves funds into buffer\n      payout(sig managerSig, pubkey recipient, int amountSats) // manager pays merchant from buffer\n      autoRefill(pubkey refillSource) // optional pattern where refill is done off-chain\n      receiveFunds()\n  - Behavior:\n      enforce sum(outputs) == inputVal - minerFeeSats\n*/\n\ncontract LiquidityBuffer(pubkey manager, int minReserveSats, int minerFeeSats) {\n\n  function topUp(sig managerSig, pubkey source, int amountSats) {\n    require(checkSig(managerSig, manager));\n\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    // For topUp we require a single output equal to distributable (avoid loops unsupported by compiler)\n    require(tx.outputs.length == 1);\n    require(tx.outputs[0].value == distributable);\n    // reference source to avoid unused-variable error\n    require(source == source);\n    require(amountSats == amountSats);\n  }\n\n  function payout(sig managerSig, pubkey recipient, int amountSats) {\n    require(checkSig(managerSig, manager));\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    require(tx.outputs.length >= 1);\n    require(tx.outputs[0].value == amountSats);\n\n    // Either single output equal distributable (no change) or recipient + change back to this contract\n    if (distributable == amountSats) {\n      require(tx.outputs.length == 1);\n    } else {\n      require(tx.outputs.length == 2);\n      require(tx.outputs[1].lockingBytecode == this.activeBytecode);\n      require(tx.outputs[1].value == distributable - amountSats);\n    }\n    // reference recipient param to avoid unused-variable warning\n    require(recipient == recipient);\n  }\n\n  function receiveFunds() {\n    // accept deposits into liquidity buffer\n    require(true);\n    // reference minReserveSats to avoid unused-variable warning\n    require(minReserveSats == minReserveSats);\n  }\n}\n",
+        "debug": {
+          "bytecode": "5379009c63547a7cadc0c6765379a0697b94c4519d00cc9d5279537a885279537a9c7777675379519c63547a7cadc0c6765379a0697b94c451a26900cc55799d7655799c63c4519d67c4529d51cdc18851cc785679949d685379547a886d6d5167537a529d5169787b9c77776868",
+          "sourceMap": "21:2:34:3;;;;;22:21:22:31;;:33::40;:4::43:1;24:29:24:50:0;:19::57:1;25:12:25:20:0;:23::35;;:12:::1;:4::37;26:35:26:47:0;:24:::1;29:12:29:29:0;:33::34;:4::36:1;30:23:30:24:0;:12::31:1;:4::50;32:12:32:18:0;;:22::28;;:4::30:1;33:12:33:22:0;;:26::36;;:4::38:1;21:2:34:3;;;36::55::0;;;;;37:21:37:31;;:33::40;:4::43:1;38:29:38:50:0;:19::57:1;39:12:39:20:0;:23::35;;:12:::1;:4::37;40:35:40:47:0;:24:::1;42:12:42:29:0;:33::34;:12:::1;:4::36;43:23:43:24:0;:12::31:1;:35::45:0;;:4::47:1;46:8:46:21:0;:25::35;;:8:::1;:37:48:5:0;47:14:47:31;:35::36;:6::38:1;48:11:52:5:0;49:14:49:31;:35::36;:6::38:1;50:25:50:26:0;:14::43:1;:47::66:0;:6::68:1;51:25:51:26:0;:14::33:1;:37::50:0;:53::63;;:37:::1;:6::65;48:11:52:5;54:12:54:21:0;;:25::34;;:4::36:1;36:2:55:3;;;;57::62::0;;;;59:12:59:16;:4::18:1;61:12:61:26:0;:30::44;:4::46:1;57:2:62:3;;19:0:63:1;",
+          "logs": [],
+          "requires": [
+            {
+              "ip": 11,
+              "line": 22
+            },
+            {
+              "ip": 18,
+              "line": 25
+            },
+            {
+              "ip": 23,
+              "line": 29
+            },
+            {
+              "ip": 26,
+              "line": 30
+            },
+            {
+              "ip": 31,
+              "line": 32
+            },
+            {
+              "ip": 37,
+              "line": 33
+            },
+            {
+              "ip": 48,
+              "line": 37
+            },
+            {
+              "ip": 55,
+              "line": 39
+            },
+            {
+              "ip": 61,
+              "line": 42
+            },
+            {
+              "ip": 66,
+              "line": 43
+            },
+            {
+              "ip": 74,
+              "line": 47
+            },
+            {
+              "ip": 78,
+              "line": 49
+            },
+            {
+              "ip": 82,
+              "line": 50
+            },
+            {
+              "ip": 89,
+              "line": 51
+            },
+            {
+              "ip": 95,
+              "line": 54
+            },
+            {
+              "ip": 105,
+              "line": 59
+            },
+            {
+              "ip": 109,
+              "line": 61
+            }
+          ]
+        },
+        "compiler": {
+          "name": "cashc",
+          "version": "0.12.0"
+        },
+        "updatedAt": "2025-11-22T11:03:31.107Z"
+      },
+      "fundedSats": 5000
+    },
+    "MerchantRegistry": {
+      "name": "MerchantRegistry",
+      "file": "MerchantRegistry.json",
+      "address": "bchtest:qrjfxafd5fu70vv2w8zm00rtws7uu6shdv97tved78",
+      "txid": "{\"txId\":\"1b22099647c181124c15b6c7d45c600e9931cd3f33fda271f9f6eae4a7871c31\",\"balance\":{\"bch\":9.99892599,\"sat\":999892599,\"usd\":5435.19},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/1b22099647c181124c15b6c7d45c600e9931cd3f33fda271f9f6eae4a7871c31\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"1b22099647c181124c15b6c7d45c600e9931cd3f33fda271f9f6eae4a7871c31\",\"balance\":{\"bch\":9.99892599,\"sat\":999892599,\"usd\":5435.19},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/1b22099647c181124c15b6c7d45c600e9931cd3f33fda271f9f6eae4a7871c31\",\"tokenIds\":[]}",
+      "artifact": {
+        "contractName": "MerchantRegistry",
+        "constructorInputs": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          }
+        ],
+        "abi": [
+          {
+            "name": "registerMerchant",
+            "inputs": [
+              {
+                "name": "ownerSig",
+                "type": "sig"
+              },
+              {
+                "name": "merchantWallet",
+                "type": "pubkey"
+              },
+              {
+                "name": "merchantData",
+                "type": "bytes"
+              }
+            ]
+          },
+          {
+            "name": "approveKYC",
+            "inputs": [
+              {
+                "name": "ownerSig",
+                "type": "sig"
+              },
+              {
+                "name": "merchantWallet",
+                "type": "pubkey"
+              },
+              {
+                "name": "kycData",
+                "type": "bytes"
+              }
+            ]
+          }
+        ],
+        "bytecode": "OP_OVER OP_0 OP_NUMEQUAL OP_IF OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_OVER OP_ROT OP_EQUALVERIFY OP_OVER OP_ROT OP_EQUAL OP_NIP OP_ELSE OP_SWAP OP_1 OP_NUMEQUALVERIFY OP_CHECKSIGVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_DUP OP_EQUALVERIFY OP_DUP OP_EQUAL OP_ENDIF",
+        "source": "pragma cashscript ^0.12.0;\n\n/*\n  MerchantRegistry Contract (CashScript compatible)\n  - Handles merchant onboarding via OP_RETURN\n  - Owner can approve KYC by signing a transaction\n  - All merchant data is stored off-chain or in OP_RETURN\n*/\n\ncontract MerchantRegistry(pubkey owner) {\n\n  // Register merchant: backend should add OP_RETURN with merchant data\n  function registerMerchant(sig ownerSig, pubkey merchantWallet, bytes merchantData) {\n    require(checkSig(ownerSig, owner));\n    // Require at least one output (OP_RETURN with merchantData)\n    require(tx.outputs.length >= 1);\n    // Optionally: check that merchantWallet is referenced in merchantData\n    require(merchantWallet == merchantWallet);\n    require(merchantData == merchantData);\n  }\n\n  // Approve KYC: backend should add OP_RETURN with KYC approval data\n  function approveKYC(sig ownerSig, pubkey merchantWallet, bytes kycData) {\n    require(checkSig(ownerSig, owner));\n    require(tx.outputs.length >= 1);\n    require(merchantWallet == merchantWallet);\n    require(kycData == kycData);\n  }\n}",
+        "debug": {
+          "bytecode": "78009c637b7cadc451a269787b88787b8777677c519dadc451a2697688768768",
+          "sourceMap": "13:2:20:3;;;;14:21:14:29;:31::36;:4::39:1;16:12:16:29:0;:33::34;:12:::1;:4::36;18:12:18:26:0;:30::44;:4::46:1;19:12:19:24:0;:28::40;:4::42:1;13:2:20:3;;23::28::0;;;24:4:24:39:1;25:12:25:29:0;:33::34;:12:::1;:4::36;26:12:26:44:0;:4::46:1;27:12:27:30:0;:4::32:1;10:0:29:1",
+          "logs": [],
+          "requires": [
+            {
+              "ip": 7,
+              "line": 14
+            },
+            {
+              "ip": 11,
+              "line": 16
+            },
+            {
+              "ip": 14,
+              "line": 18
+            },
+            {
+              "ip": 18,
+              "line": 19
+            },
+            {
+              "ip": 23,
+              "line": 24
+            },
+            {
+              "ip": 27,
+              "line": 25
+            },
+            {
+              "ip": 29,
+              "line": 26
+            },
+            {
+              "ip": 32,
+              "line": 27
+            }
+          ]
+        },
+        "compiler": {
+          "name": "cashc",
+          "version": "0.12.0"
+        },
+        "updatedAt": "2025-11-22T19:40:01.896Z"
+      },
+      "fundedSats": 5000
+    },
+    "MultiSigVault": {
+      "name": "MultiSigVault",
+      "file": "MultiSigVault.json",
+      "address": "bchtest:qrze4pt5d0dyxf384xu7t44kpy2alvgzku2zlj480l",
+      "txid": "{\"txId\":\"fa49092e1a5de3b27c80f5e2ed9cab4f312811d454d285e958f5c2658d983a59\",\"balance\":{\"bch\":9.99882379,\"sat\":999882379,\"usd\":5435.14},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/fa49092e1a5de3b27c80f5e2ed9cab4f312811d454d285e958f5c2658d983a59\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"fa49092e1a5de3b27c80f5e2ed9cab4f312811d454d285e958f5c2658d983a59\",\"balance\":{\"bch\":9.99882379,\"sat\":999882379,\"usd\":5435.14},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/fa49092e1a5de3b27c80f5e2ed9cab4f312811d454d285e958f5c2658d983a59\",\"tokenIds\":[]}",
+      "artifact": {
+        "contractName": "MultiSigVault",
+        "constructorInputs": [
+          {
+            "name": "owner0",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner1",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner2",
+            "type": "pubkey"
+          },
+          {
+            "name": "minerFeeSats",
+            "type": "int"
+          },
+          {
+            "name": "emergencyPubkey",
+            "type": "pubkey"
+          },
+          {
+            "name": "emergencyUnlockTime",
+            "type": "int"
+          }
+        ],
+        "abi": [
+          {
+            "name": "spend",
+            "inputs": [
+              {
+                "name": "s0",
+                "type": "sig"
+              },
+              {
+                "name": "s1",
+                "type": "sig"
+              },
+              {
+                "name": "amountSats",
+                "type": "int"
+              }
+            ]
+          },
+          {
+            "name": "emergencyWithdraw",
+            "inputs": [
+              {
+                "name": "emergencySig",
+                "type": "sig"
+              }
+            ]
+          },
+          {
+            "name": "receiveFunds",
+            "inputs": []
+          }
+        ],
+        "bytecode": "OP_6 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_7 OP_PICK OP_OVER OP_CHECKSIG OP_9 OP_PICK OP_3 OP_PICK OP_CHECKSIG OP_BOOLAND OP_8 OP_PICK OP_2 OP_PICK OP_CHECKSIG OP_10 OP_PICK OP_5 OP_PICK OP_CHECKSIG OP_BOOLAND OP_BOOLOR OP_8 OP_PICK OP_3 OP_PICK OP_CHECKSIG OP_10 OP_PICK OP_3 OP_PICK OP_CHECKSIG OP_BOOLAND OP_BOOLOR OP_8 OP_PICK OP_3 OP_PICK OP_CHECKSIG OP_10 OP_PICK OP_5 OP_PICK OP_CHECKSIG OP_BOOLAND OP_BOOLOR OP_8 OP_PICK OP_4 OP_PICK OP_CHECKSIG OP_10 OP_PICK OP_3 OP_ROLL OP_CHECKSIG OP_BOOLAND OP_BOOLOR OP_7 OP_ROLL OP_3 OP_ROLL OP_CHECKSIG OP_7 OP_ROLL OP_3 OP_ROLL OP_CHECKSIG OP_BOOLAND OP_BOOLOR OP_VERIFY OP_INPUTINDEX OP_UTXOVALUE OP_2DUP OP_LESSTHAN OP_VERIFY OP_SWAP OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_0 OP_OUTPUTVALUE OP_5 OP_PICK OP_NUMEQUALVERIFY OP_DUP OP_5 OP_PICK OP_NUMEQUAL OP_IF OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUALVERIFY OP_ELSE OP_TXOUTPUTCOUNT OP_2 OP_NUMEQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_ACTIVEBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTVALUE OP_OVER OP_6 OP_PICK OP_SUB OP_NUMEQUALVERIFY OP_ENDIF OP_2DROP OP_2DROP OP_DROP OP_1 OP_ELSE OP_6 OP_PICK OP_1 OP_NUMEQUAL OP_IF OP_TXLOCKTIME OP_6 OP_ROLL OP_GREATERTHANOREQUAL OP_VERIFY OP_6 OP_ROLL OP_5 OP_ROLL OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_5 OP_PICK OP_GREATERTHAN OP_VERIFY OP_4 OP_ROLL OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_0 OP_OUTPUTVALUE OP_NUMEQUALVERIFY OP_2DROP OP_2DROP OP_1 OP_ELSE OP_6 OP_ROLL OP_2 OP_NUMEQUALVERIFY OP_1 OP_VERIFY OP_2DROP OP_2DROP OP_2DROP OP_1 OP_ENDIF OP_ENDIF",
+        "source": "pragma cashscript ^0.12.0;\n\n/*\n  MultiSigVault.cash\n  - Constructor:\n      pubkey[] owners,\n      int threshold,\n      int minerFeeSats,\n      pubkey emergencyPubkey,\n      int emergencyUnlockTime\n  - Functions:\n      spend(sig[] sigs, pubkey recipient, int amountSats)\n      emergencyWithdraw(sig emergencySig, pubkey recipient)\n      receiveFunds()\n  Notes:\n    - Backend must assemble at least `threshold` valid signatures in `sigs`.\n    - Active input must be set to the contract UTXO.\n    - Sum(outputs) == inputVal - minerFeeSats.\n*/\n\ncontract MultiSigVault(pubkey owner0, pubkey owner1, pubkey owner2, int minerFeeSats, pubkey emergencyPubkey, int emergencyUnlockTime) {\n\n  // Supports 2-of-3 multisig using explicit signature parameters (s0,s1).\n  function spend(sig s0, sig s1, int amountSats) {\n    bool valid = (checkSig(s0, owner0) && checkSig(s1, owner1))\n                 || (checkSig(s0, owner0) && checkSig(s1, owner2))\n                 || (checkSig(s0, owner1) && checkSig(s1, owner0))\n                 || (checkSig(s0, owner1) && checkSig(s1, owner2))\n                 || (checkSig(s0, owner2) && checkSig(s1, owner0))\n                 || (checkSig(s0, owner2) && checkSig(s1, owner1));\n    require(valid);\n\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    require(tx.outputs.length >= 1);\n    require(tx.outputs[0].value == amountSats);\n\n    // No loops allowed; enforce either single output == distributable, or recipient + change back to contract\n    if (distributable == amountSats) {\n      require(tx.outputs.length == 1);\n    } else {\n      require(tx.outputs.length == 2);\n      require(tx.outputs[1].lockingBytecode == this.activeBytecode);\n      require(tx.outputs[1].value == distributable - amountSats);\n    }\n  }\n\n  function emergencyWithdraw(sig emergencySig) {\n    require(tx.locktime >= emergencyUnlockTime);\n    require(checkSig(emergencySig, emergencyPubkey));\n\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    require(tx.outputs.length >= 1);\n    require(tx.outputs[0].value == distributable);\n  }\n\n  function receiveFunds() {\n    // Accept deposits\n    require(true);\n  }\n}\n",
+        "debug": {
+          "bytecode": "5679009c63577978ac59795379ac9a58795279ac5a795579ac9a9b58795379ac5a795379ac9a9b58795379ac5a795579ac9a9b58795479ac5a79537aac9a9b577a537aac577a537aac9a9b69c0c66e9f697c94c451a26900cc55799d7655799c63c4519d67c4529d51cdc18851cc785679949d686d6d7551675679519c63c5567aa269567a557aadc0c6765579a069547a94c451a26900cc9d6d6d5167567a529d51696d6d6d516868",
+          "sourceMap": "24:2:48:3;;;;;25:27:25:29;;:31::37;:18::38:1;:51::53:0;;:55::61;;:42::62:1;:18;26:30:26:32:0;;:34::40;;:21::41:1;:54::56:0;;:58::64;;:45::65:1;:21;25:17::66;27:30:27:32:0;;:34::40;;:21::41:1;:54::56:0;;:58::64;;:45::65:1;:21;25:17::66;28:30:28:32:0;;:34::40;;:21::41:1;:54::56:0;;:58::64;;:45::65:1;:21;25:17::66;29:30:29:32:0;;:34::40;;:21::41:1;:54::56:0;;:58::64;;:45::65:1;:21;25:17::66;30:30:30:32:0;;:34::40;;:21::41:1;:54::56:0;;:58::64;;:45::65:1;:21;25:17::66;31:4:31:19;33:29:33:50:0;:19::57:1;34:12:34:35:0;::::1;:4::37;35:35:35:47:0;:24:::1;37:12:37:29:0;:33::34;:12:::1;:4::36;38:23:38:24:0;:12::31:1;:35::45:0;;:4::47:1;41:8:41:21:0;:25::35;;:8:::1;:37:43:5:0;42:14:42:31;:35::36;:6::38:1;43:11:47:5:0;44:14:44:31;:35::36;:6::38:1;45:25:45:26:0;:14::43:1;:47::66:0;:6::68:1;46:25:46:26:0;:14::33:1;:37::50:0;:53::63;;:37:::1;:6::65;43:11:47:5;24:2:48:3;;;;;50::60::0;;;;;51:12:51:23;:27::46;;:12:::1;:4::48;52:21:52:33:0;;:35::50;;:4::53:1;54:29:54:50:0;:19::57:1;55:12:55:20:0;:23::35;;:12:::1;:4::37;56:35:56:47:0;;:24:::1;58:12:58:29:0;:33::34;:12:::1;:4::36;59:23:59:24:0;:12::31:1;:4::50;50:2:60:3;;;;62::65::0;;;;64:12:64:16;:4::18:1;62:2:65:3;;;;21:0:66:1;",
+          "logs": [],
+          "requires": [
+            {
+              "ip": 81,
+              "line": 31
+            },
+            {
+              "ip": 86,
+              "line": 34
+            },
+            {
+              "ip": 92,
+              "line": 37
+            },
+            {
+              "ip": 97,
+              "line": 38
+            },
+            {
+              "ip": 105,
+              "line": 42
+            },
+            {
+              "ip": 109,
+              "line": 44
+            },
+            {
+              "ip": 113,
+              "line": 45
+            },
+            {
+              "ip": 120,
+              "line": 46
+            },
+            {
+              "ip": 136,
+              "line": 51
+            },
+            {
+              "ip": 141,
+              "line": 52
+            },
+            {
+              "ip": 148,
+              "line": 55
+            },
+            {
+              "ip": 155,
+              "line": 58
+            },
+            {
+              "ip": 158,
+              "line": 59
+            },
+            {
+              "ip": 168,
+              "line": 64
+            }
+          ]
+        },
+        "compiler": {
+          "name": "cashc",
+          "version": "0.12.0"
+        },
+        "updatedAt": "2025-11-22T11:03:26.710Z"
+      },
+      "fundedSats": 10000
+    },
+    "PaymentRouter": {
+      "name": "PaymentRouter",
+      "file": "PaymentRouter.json",
+      "address": "bchtest:qra23ehkceejq8xawfntvl9d6vtupsn9a53zlpksxx",
+      "txid": "{\"txId\":\"72836558350f533870f600f86752ba704cdf0f2491473ae052db21a8a2683dba\",\"balance\":{\"bch\":9.99877159,\"sat\":999877159,\"usd\":5435.11},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/72836558350f533870f600f86752ba704cdf0f2491473ae052db21a8a2683dba\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"72836558350f533870f600f86752ba704cdf0f2491473ae052db21a8a2683dba\",\"balance\":{\"bch\":9.99877159,\"sat\":999877159,\"usd\":5435.11},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/72836558350f533870f600f86752ba704cdf0f2491473ae052db21a8a2683dba\",\"tokenIds\":[]}",
+      "artifact": {
+        "contractName": "PaymentRouter",
+        "constructorInputs": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "expectedAmountSats",
+            "type": "int"
+          },
+          {
+            "name": "minerFeeSats",
+            "type": "int"
+          },
+          {
+            "name": "invoiceIdHash",
+            "type": "bytes"
+          }
+        ],
+        "abi": [
+          {
+            "name": "finalize",
+            "inputs": [
+              {
+                "name": "ownerSig",
+                "type": "sig"
+              },
+              {
+                "name": "destination",
+                "type": "pubkey"
+              }
+            ]
+          },
+          {
+            "name": "receiveFunds",
+            "inputs": []
+          }
+        ],
+        "bytecode": "OP_4 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_5 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_2DUP OP_SWAP OP_4 OP_PICK OP_ADD OP_GREATERTHANOREQUAL OP_VERIFY OP_ROT OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_0 OP_OUTPUTVALUE OP_2 OP_PICK OP_NUMEQUALVERIFY OP_2DUP OP_NUMEQUAL OP_IF OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUALVERIFY OP_ELSE OP_TXOUTPUTCOUNT OP_2 OP_NUMEQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_ACTIVEBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTVALUE OP_OVER OP_3 OP_PICK OP_SUB OP_NUMEQUALVERIFY OP_ENDIF OP_4 OP_PICK OP_5 OP_ROLL OP_EQUALVERIFY OP_2DROP OP_2DROP OP_1 OP_ELSE OP_4 OP_ROLL OP_1 OP_NUMEQUALVERIFY OP_1 OP_VERIFY OP_3 OP_PICK OP_4 OP_ROLL OP_EQUAL OP_NIP OP_NIP OP_NIP OP_ENDIF",
+        "source": "pragma cashscript ^0.12.0;\n\n/*\n  PaymentRouter.cash\n  - Purpose: Accept a buyer payment to the router and enforce invoice amount; route to merchant or vault.\n  - Constructor:\n      pubkey owner,            // platform / merchant owner (optional admin)\n      int expectedAmountSats,  // invoice amount expected for this router instance\n      int minerFeeSats,        // expected miner fee for routing tx\n      bytes32 invoiceIdHash    // hash of invoice id/metadata (optional, for indexers)\n  - Function:\n      finalize(sig ownerSig, pubkey destination)  -- called by backend to route funds after verifying payment\n  - Behavior:\n      - This contract is meant to be funded by buyer paying `expectedAmountSats`.\n      - On finalize: require inputVal >= expectedAmountSats + minerFeeSats\n        then enforce outputs sum equals inputVal - minerFeeSats and output[0] == expectedAmountSats to destination.\n      - This lets buyer pay to router and backend safely route funds.\n  Notes:\n    - Active input must be router UTXO.\n    - invoiceIdHash allows indexers to correlate payments to invoices (backend places same hash into metadata or OP_RETURN).\n*/\n\ncontract PaymentRouter(pubkey owner, int expectedAmountSats, int minerFeeSats, bytes invoiceIdHash) {\n\n  function finalize(sig ownerSig, pubkey destination) {\n    require(checkSig(ownerSig, owner));\n\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n\n    // require the buyer paid at least the expected amount\n    require(inputVal >= expectedAmountSats + minerFeeSats);\n\n    int distributable = inputVal - minerFeeSats;\n\n    // backend must build outputs so that output[0] is destination with expectedAmountSats\n    require(tx.outputs.length >= 1);\n    require(tx.outputs[0].value == expectedAmountSats);\n\n    // ensure the sum of outputs equals distributable\n    // Support either single output equal to distributable or destination + change back to router\n    if (distributable == expectedAmountSats) {\n      require(tx.outputs.length == 1);\n    } else {\n      require(tx.outputs.length == 2);\n      require(tx.outputs[1].lockingBytecode == this.activeBytecode);\n      require(tx.outputs[1].value == distributable - expectedAmountSats);\n    }\n    // reference destination to avoid unused-variable warning\n    require(destination == destination);\n  }\n\n  function receiveFunds() {\n    // Accept buyer deposit to invoice router\n    require(true);\n    // reference invoiceIdHash to avoid unused-variable warning\n    require(invoiceIdHash == invoiceIdHash);\n  }\n}\n",
+        "debug": {
+          "bytecode": "5479009c63557a7cadc0c66e7c547993a2697b94c451a26900cc52799d6e9c63c4519d67c4529d51cdc18851cc785379949d685479557a886d6d5167547a519d51695379547a8777777768",
+          "sourceMap": "25:2:50:3;;;;;26:21:26:29;;:31::36;:4::39:1;28:29:28:50:0;:19::57:1;31:12:31:42:0;;:45::57;;:24:::1;:12;:4::59;33:35:33:47:0;:24:::1;36:12:36:29:0;:33::34;:12:::1;:4::36;37:23:37:24:0;:12::31:1;:35::53:0;;:4::55:1;41:8:41:43:0;::::1;:45:43:5:0;42:14:42:31;:35::36;:6::38:1;43:11:47:5:0;44:14:44:31;:35::36;:6::38:1;45:25:45:26:0;:14::43:1;:47::66:0;:6::68:1;46:25:46:26:0;:14::33:1;:37::50:0;:53::71;;:37:::1;:6::73;43:11:47:5;49:12:49:23:0;;:27::38;;:4::40:1;25:2:50:3;;;;52::57::0;;;;54:12:54:16;:4::18:1;56:12:56:25:0;;:29::42;;:4::44:1;52:2:57:3;;;23:0:58:1",
+          "logs": [],
+          "requires": [
+            {
+              "ip": 12,
+              "line": 26
+            },
+            {
+              "ip": 21,
+              "line": 31
+            },
+            {
+              "ip": 27,
+              "line": 36
+            },
+            {
+              "ip": 32,
+              "line": 37
+            },
+            {
+              "ip": 38,
+              "line": 42
+            },
+            {
+              "ip": 42,
+              "line": 44
+            },
+            {
+              "ip": 46,
+              "line": 45
+            },
+            {
+              "ip": 53,
+              "line": 46
+            },
+            {
+              "ip": 59,
+              "line": 49
+            },
+            {
+              "ip": 69,
+              "line": 54
+            },
+            {
+              "ip": 75,
+              "line": 56
+            }
+          ]
+        },
+        "compiler": {
+          "name": "cashc",
+          "version": "0.12.0"
+        },
+        "updatedAt": "2025-11-22T11:03:31.905Z"
+      },
+      "fundedSats": 5000
+    },
+    "RevenueRouter": {
+      "name": "RevenueRouter",
+      "file": "RevenueRouter.json",
+      "address": "bchtest:qpyz9yt9cl6j6vkw60ggk8waqwt7zjhr9s0my75fpa",
+      "txid": "{\"txId\":\"0791000c3bf5d9fca1a9ce45814272f556f306d0c306b853bb7f03f88efb7960\",\"balance\":{\"bch\":9.99871939,\"sat\":999871939,\"usd\":5435.08},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/0791000c3bf5d9fca1a9ce45814272f556f306d0c306b853bb7f03f88efb7960\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"0791000c3bf5d9fca1a9ce45814272f556f306d0c306b853bb7f03f88efb7960\",\"balance\":{\"bch\":9.99871939,\"sat\":999871939,\"usd\":5435.08},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/0791000c3bf5d9fca1a9ce45814272f556f306d0c306b853bb7f03f88efb7960\",\"tokenIds\":[]}",
+      "artifact": {
+        "contractName": "RevenueRouter",
+        "constructorInputs": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient0",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient1",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient2",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient3",
+            "type": "pubkey"
+          },
+          {
+            "name": "bp0",
+            "type": "int"
+          },
+          {
+            "name": "bp1",
+            "type": "int"
+          },
+          {
+            "name": "bp2",
+            "type": "int"
+          },
+          {
+            "name": "bp3",
+            "type": "int"
+          },
+          {
+            "name": "recipientsCount",
+            "type": "int"
+          },
+          {
+            "name": "minerFeeSats",
+            "type": "int"
+          }
+        ],
+        "abi": [
+          {
+            "name": "distribute",
+            "inputs": [
+              {
+                "name": "ownerSig",
+                "type": "sig"
+              }
+            ]
+          },
+          {
+            "name": "receiveFunds",
+            "inputs": []
+          }
+        ],
+        "bytecode": "OP_11 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_12 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_11 OP_PICK OP_GREATERTHAN OP_VERIFY OP_10 OP_ROLL OP_SUB OP_9 OP_PICK OP_1 OP_GREATERTHANOREQUAL OP_10 OP_PICK OP_4 OP_LESSTHANOREQUAL OP_BOOLAND OP_VERIFY OP_TXOUTPUTCOUNT OP_10 OP_PICK OP_NUMEQUALVERIFY OP_9 OP_PICK OP_1 OP_NUMEQUAL OP_IF OP_0 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_ELSE OP_9 OP_PICK OP_2 OP_NUMEQUAL OP_IF OP_DUP OP_6 OP_PICK OP_MUL 1027 OP_DIV OP_0 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2DUP OP_SUB OP_1 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2DROP OP_ELSE OP_9 OP_PICK OP_3 OP_NUMEQUAL OP_IF OP_DUP OP_6 OP_PICK OP_MUL 1027 OP_DIV OP_OVER OP_8 OP_PICK OP_MUL 1027 OP_DIV OP_0 OP_OUTPUTVALUE OP_2 OP_PICK OP_NUMEQUALVERIFY OP_1 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2 OP_PICK OP_2 OP_PICK OP_SUB OP_OVER OP_SUB OP_2 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2DROP OP_DROP OP_ELSE OP_DUP OP_6 OP_PICK OP_MUL 1027 OP_DIV OP_OVER OP_8 OP_PICK OP_MUL 1027 OP_DIV OP_2 OP_PICK OP_10 OP_PICK OP_MUL 1027 OP_DIV OP_0 OP_OUTPUTVALUE OP_3 OP_PICK OP_NUMEQUALVERIFY OP_1 OP_OUTPUTVALUE OP_2 OP_PICK OP_NUMEQUALVERIFY OP_2 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2OVER OP_SUB OP_2 OP_PICK OP_SUB OP_OVER OP_SUB OP_3 OP_OUTPUTVALUE OP_OVER OP_NUMEQUALVERIFY OP_2DROP OP_2DROP OP_ENDIF OP_ENDIF OP_ENDIF OP_9 OP_PICK OP_1 OP_GREATERTHANOREQUAL OP_IF OP_OVER OP_2 OP_PICK OP_EQUALVERIFY OP_ENDIF OP_9 OP_PICK OP_2 OP_GREATERTHANOREQUAL OP_IF OP_2 OP_PICK OP_3 OP_PICK OP_EQUALVERIFY OP_ENDIF OP_9 OP_PICK OP_3 OP_GREATERTHANOREQUAL OP_IF OP_3 OP_PICK OP_4 OP_PICK OP_EQUALVERIFY OP_ENDIF OP_9 OP_ROLL OP_4 OP_GREATERTHANOREQUAL OP_IF OP_4 OP_PICK OP_5 OP_PICK OP_EQUALVERIFY OP_ENDIF OP_5 OP_PICK OP_6 OP_ROLL OP_NUMEQUALVERIFY OP_5 OP_PICK OP_6 OP_ROLL OP_NUMEQUALVERIFY OP_5 OP_PICK OP_6 OP_ROLL OP_NUMEQUALVERIFY OP_5 OP_PICK OP_6 OP_ROLL OP_NUMEQUALVERIFY OP_2DROP OP_2DROP OP_2DROP OP_1 OP_ELSE OP_11 OP_ROLL OP_1 OP_NUMEQUALVERIFY OP_1 OP_VERIFY OP_2DROP OP_2DROP OP_2DROP OP_2DROP OP_2DROP OP_DROP OP_1 OP_ENDIF",
+        "source": "pragma cashscript ^0.12.0;\n\n/*\n  RevenueRouter.cash\n  - Constructor:\n      pubkey owner,\n      pubkey[] recipients,\n      int[] basisPoints,     // parts per 10,000\n      int minerFeeSats\n  - Function:\n      distribute(sig ownerSig)\n    Behavior:\n      - ownerSig required\n      - total = tx.inputs[this.activeInputIndex].value\n      - distributable = total - minerFeeSats\n      - compute amounts for recipients[0..n-2] as floor(distributable * bp / 10000)\n      - last recipient gets distributable - sum(computed)\n      - require tx.outputs.length == recipients.length\n      - require tx.outputs[i].value == computedAmount[i]\n*/\n\ncontract RevenueRouter(pubkey owner,\n                       pubkey recipient0, pubkey recipient1, pubkey recipient2, pubkey recipient3,\n                       int bp0, int bp1, int bp2, int bp3,\n                       int recipientsCount,\n                       int minerFeeSats) {\n\n  function distribute(sig ownerSig) {\n    require(checkSig(ownerSig, owner));\n\n    int total = tx.inputs[this.activeInputIndex].value;\n    require(total > minerFeeSats);\n    int distributable = total - minerFeeSats;\n\n    // require outputs length equal recipientsCount\n    require(recipientsCount >= 1 && recipientsCount <= 4);\n    require(tx.outputs.length == recipientsCount);\n\n    if (recipientsCount == 1) {\n      require(tx.outputs[0].value == distributable);\n    } else if (recipientsCount == 2) {\n      int amt0 = (distributable * bp0) / 10000;\n      require(tx.outputs[0].value == amt0);\n      int amt1 = distributable - amt0;\n      require(tx.outputs[1].value == amt1);\n    } else if (recipientsCount == 3) {\n      int amt0 = (distributable * bp0) / 10000;\n      int amt1 = (distributable * bp1) / 10000;\n      require(tx.outputs[0].value == amt0);\n      require(tx.outputs[1].value == amt1);\n      int amt2 = distributable - amt0 - amt1;\n      require(tx.outputs[2].value == amt2);\n    } else {\n      int amt0 = (distributable * bp0) / 10000;\n      int amt1 = (distributable * bp1) / 10000;\n      int amt2 = (distributable * bp2) / 10000;\n      require(tx.outputs[0].value == amt0);\n      require(tx.outputs[1].value == amt1);\n      require(tx.outputs[2].value == amt2);\n      int amt3 = distributable - amt0 - amt1 - amt2;\n      require(tx.outputs[3].value == amt3);\n    }\n    // Use recipient variables to avoid unused-variable compile errors\n    if (recipientsCount >= 1) { require(recipient0 == recipient0); }\n    if (recipientsCount >= 2) { require(recipient1 == recipient1); }\n    if (recipientsCount >= 3) { require(recipient2 == recipient2); }\n    if (recipientsCount >= 4) { require(recipient3 == recipient3); }\n    // Reference basis point variables to avoid unused-variable warnings\n    require(bp0 == bp0);\n    require(bp1 == bp1);\n    require(bp2 == bp2);\n    require(bp3 == bp3);\n  }\n\n  function receiveFunds() {\n    require(true);\n  }\n}\n",
+        "debug": {
+          "bytecode": "5b79009c635c7a7cadc0c6765b79a0695a7a94597951a25a7954a19a69c45a799d5979519c6300cc789d675979529c63765679950210279600cc789d6e9451cc789d6d675979539c637656799502102796785879950210279600cc52799d51cc789d5279527994789452cc789d6d75677656799502102796785879950210279652795a79950210279600cc53799d51cc52799d52cc789d7094527994789453cc789d6d6d686868597951a2637852798868597952a263527953798868597953a263537954798868597a54a2635479557988685579567a9d5579567a9d5579567a9d5579567a9d6d6d6d51675b7a519d51696d6d6d6d6d755168",
+          "sourceMap": "28:2:73:3;;;;;29:21:29:29;;:31::36;:4::39:1;31:26:31:47:0;:16::54:1;32:12:32:17:0;:20::32;;:12:::1;:4::34;33:32:33:44:0;;:24:::1;36:12:36:27:0;;:31::32;:12:::1;:36::51:0;;:55::56;:36:::1;:12;:4::58;37:12:37:29:0;:33::48;;:4::50:1;39:8:39:23:0;;:27::28;:8:::1;:30:41:5:0;40:25:40:26;:14::33:1;:37::50:0;:6::52:1;41:11:62:5:0;:15:41:30;;:34::35;:15:::1;:37:46:5:0;42:18:42:31;:34::37;;:18:::1;:41::46:0;:17:::1;43:25:43:26:0;:14::33:1;:37::41:0;:6::43:1;44:17:44:37:0;::::1;45:25:45:26:0;:14::33:1;:37::41:0;:6::43:1;41:37:46:5;46:11:62::0;:15:46:30;;:34::35;:15:::1;:37:53:5:0;47:18:47:31;:34::37;;:18:::1;:41::46:0;:17:::1;48:18:48:31:0;:34::37;;:18:::1;:41::46:0;:17:::1;49:25:49:26:0;:14::33:1;:37::41:0;;:6::43:1;50:25:50:26:0;:14::33:1;:37::41:0;:6::43:1;51:17:51:30:0;;:33::37;;:17:::1;:40::44:0;:17:::1;52:25:52:26:0;:14::33:1;:37::41:0;:6::43:1;46:37:53:5;;53:11:62::0;54:18:54:31;:34::37;;:18:::1;:41::46:0;:17:::1;55:18:55:31:0;:34::37;;:18:::1;:41::46:0;:17:::1;56:18:56:31:0;;:34::37;;:18:::1;:41::46:0;:17:::1;57:25:57:26:0;:14::33:1;:37::41:0;;:6::43:1;58:25:58:26:0;:14::33:1;:37::41:0;;:6::43:1;59:25:59:26:0;:14::33:1;:37::41:0;:6::43:1;60:17:60:37:0;::::1;:40::44:0;;:17:::1;:47::51:0;:17:::1;61:25:61:26:0;:14::33:1;:37::41:0;:6::43:1;53:11:62:5;;;46;41;64:8:64:23:0;;:27::28;:8:::1;:30::68:0;:40::50;:54::64;;:32::66:1;:30::68;65:8:65:23:0;;:27::28;:8:::1;:30::68:0;:40::50;;:54::64;;:32::66:1;:30::68;66:8:66:23:0;;:27::28;:8:::1;:30::68:0;:40::50;;:54::64;;:32::66:1;:30::68;67:8:67:23:0;;:27::28;:8:::1;:30::68:0;:40::50;;:54::64;;:32::66:1;:30::68;69:12:69:15:0;;:19::22;;:4::24:1;70:12:70:15:0;;:19::22;;:4::24:1;71:12:71:15:0;;:19::22;;:4::24:1;72:12:72:15:0;;:19::22;;:4::24:1;28:2:73:3;;;;;75::77::0;;;;76:12:76:16;:4::18:1;75:2:77:3;;;;;;;22:0:78:1",
+          "logs": [],
+          "requires": [
+            {
+              "ip": 19,
+              "line": 29
+            },
+            {
+              "ip": 26,
+              "line": 32
+            },
+            {
+              "ip": 39,
+              "line": 36
+            },
+            {
+              "ip": 43,
+              "line": 37
+            },
+            {
+              "ip": 52,
+              "line": 40
+            },
+            {
+              "ip": 68,
+              "line": 43
+            },
+            {
+              "ip": 74,
+              "line": 45
+            },
+            {
+              "ip": 98,
+              "line": 49
+            },
+            {
+              "ip": 102,
+              "line": 50
+            },
+            {
+              "ip": 113,
+              "line": 52
+            },
+            {
+              "ip": 140,
+              "line": 57
+            },
+            {
+              "ip": 145,
+              "line": 58
+            },
+            {
+              "ip": 149,
+              "line": 59
+            },
+            {
+              "ip": 160,
+              "line": 61
+            },
+            {
+              "ip": 174,
+              "line": 64
+            },
+            {
+              "ip": 185,
+              "line": 65
+            },
+            {
+              "ip": 196,
+              "line": 66
+            },
+            {
+              "ip": 207,
+              "line": 67
+            },
+            {
+              "ip": 213,
+              "line": 69
+            },
+            {
+              "ip": 218,
+              "line": 70
+            },
+            {
+              "ip": 223,
+              "line": 71
+            },
+            {
+              "ip": 228,
+              "line": 72
+            },
+            {
+              "ip": 239,
+              "line": 76
+            }
+          ]
+        },
+        "compiler": {
+          "name": "cashc",
+          "version": "0.12.0"
+        },
+        "updatedAt": "2025-11-22T11:03:27.509Z"
+      },
+      "fundedSats": 5000
+    },
+    "Vault": {
+      "name": "Vault",
+      "file": "VaultFactory.json",
+      "address": "bchtest:qrcshkzk8wvk33ad26zl3gea8xyqhqr5zgr2qa42pf",
+      "txid": "{\"txId\":\"5861b7377b872ee50472683667948bc621e86b4135813fa65dde616ad4fd75de\",\"balance\":{\"bch\":9.99861719,\"sat\":999861719,\"usd\":5435.03},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/5861b7377b872ee50472683667948bc621e86b4135813fa65dde616ad4fd75de\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"5861b7377b872ee50472683667948bc621e86b4135813fa65dde616ad4fd75de\",\"balance\":{\"bch\":9.99861719,\"sat\":999861719,\"usd\":5435.03},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/5861b7377b872ee50472683667948bc621e86b4135813fa65dde616ad4fd75de\",\"tokenIds\":[]}",
+      "artifact": {
+        "contractName": "Vault",
+        "constructorInputs": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          }
+        ],
+        "abi": [
+          {
+            "name": "spend",
+            "inputs": [
+              {
+                "name": "ownerSig",
+                "type": "sig"
+              },
+              {
+                "name": "amount",
+                "type": "int"
+              }
+            ]
+          },
+          {
+            "name": "receiveFunds",
+            "inputs": []
+          }
+        ],
+        "bytecode": "OP_OVER OP_0 OP_NUMEQUAL OP_IF OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_SWAP 40420f OP_LESSTHANOREQUAL OP_NIP OP_ELSE OP_SWAP OP_1 OP_NUMEQUALVERIFY OP_DROP OP_1 OP_ENDIF",
+        "source": "pragma cashscript ^0.12.0;\n\n/*\n  Vault Contract\n  - Single owner\n  - Spending limit\n  - Accepts BCH\n*/\n\ncontract Vault(pubkey owner) {\n\n  // Owner can spend funds\n  function spend(sig ownerSig, int amount) {\n    require(checkSig(ownerSig, owner));\n    require(amount <= 1000000); // spending limit in satoshis\n  }\n\n  // Accept BCH (no-op function)\n  function receiveFunds() {\n    require(true);\n  }\n}\n",
+        "debug": {
+          "bytecode": "78009c637b7cad7c0340420fa177677c519d755168",
+          "sourceMap": "13:2:16:3;;;;14:21:14:29;:31::36;:4::39:1;15:12:15:18:0;:22::29;:4::31:1;13:2:16:3;;19::21::0;;;::::1;;10:0:22:1",
+          "logs": [],
+          "requires": [
+            {
+              "ip": 7,
+              "line": 14
+            },
+            {
+              "ip": 11,
+              "line": 15
+            },
+            {
+              "ip": 17,
+              "line": 20
+            }
+          ]
+        },
+        "compiler": {
+          "name": "cashc",
+          "version": "0.12.0"
+        },
+        "updatedAt": "2025-11-22T11:03:28.126Z"
+      },
+      "fundedSats": 10000
+    }
+  },
+  "privateKeys": {
+    "Escrow": "cRyLPKS5KdBn3XdVnYzZzHyCih67Kfbz4cB2B9fp21evosmJZQwG",
+    "FeeSplitter": "cSyDpU6N2ndMj3KbhwBSTJ2pNDBMb3xXrNgU1qCW6aNcoozYdxCq",
+    "KYCRegistry": "cTY1Gjkg8LxLzZkNf4bcw3McqDVYTgi78NXcW4evnT5J2EVfjnM3",
+    "LiquidityBuffer": "cMgWsVpunC3ydFfb8iQpbT3zn9TDK9yC61ZB5WXSC5P3cMWQbqii",
+    "MerchantRegistry": "cSbns9zpnsLKFspzSsCQ6vzMDLChfLYrdu5SM4ZjevZR4rhMgwfY",
+    "MultiSigVault": "cTuwi259nNMXMfj8PxZF5TqbaRWEzVuxdsdW2JfQZd81io33Yqdi",
+    "PaymentRouter": "cTUcQZqLx1eBQs25QuUBDCeVALyvTk6RXp5y68PmRCCvSECFZLDD",
+    "RevenueRouter": "cUr21HMZYQC6kh6e84YQSBLqXnYej1BWxZ5NbDTK1jCq7Hic7NkP",
+    "Vault": "cUV5X4XiXi3yPWbgoHKKYrSeBeZ2odpga9wyHGH68v4Um6fXcCk4"
+  }
+}

@@ -1,0 +1,24 @@
+// Layla Chips version of Vault
+// TODO: Adapt logic from Vault.cash if needed
+pragma cashscript ^0.12.0;
+
+/*
+	Vault Contract
+	- Single owner
+	- Spending limit
+	- Accepts BCH
+*/
+
+contract Vault(pubkey owner) {
+
+	// Owner can spend funds
+	function spend(sig ownerSig, int amount) {
+		require(checkSig(ownerSig, owner));
+		require(amount <= 1000000); // spending limit in satoshis
+	}
+
+	// Accept BCH (no-op function)
+	function receiveFunds() {
+		require(true);
+	}
+}

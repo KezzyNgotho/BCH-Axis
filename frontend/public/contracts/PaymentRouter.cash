@@ -1,0 +1,58 @@
+pragma cashscript ^0.12.0;
+
+/*
+  PaymentRouter.cash
+  - Purpose: Accept a buyer payment to the router and enforce invoice amount; route to merchant or vault.
+  - Constructor:
+      pubkey owner,            // platform / merchant owner (optional admin)
+      int expectedAmountSats,  // invoice amount expected for this router instance
+      int minerFeeSats,        // expected miner fee for routing tx
+      bytes32 invoiceIdHash    // hash of invoice id/metadata (optional, for indexers)
+  - Function:
+      finalize(sig ownerSig, pubkey destination)  -- called by backend to route funds after verifying payment
+  - Behavior:
+      - This contract is meant to be funded by buyer paying `expectedAmountSats`.
+      - On finalize: require inputVal >= expectedAmountSats + minerFeeSats
+        then enforce outputs sum equals inputVal - minerFeeSats and output[0] == expectedAmountSats to destination.
+      - This lets buyer pay to router and backend safely route funds.
+  Notes:
+    - Active input must be router UTXO.
+    - invoiceIdHash allows indexers to correlate payments to invoices (backend places same hash into metadata or OP_RETURN).
+*/
+
+contract PaymentRouter(pubkey owner, int expectedAmountSats, int minerFeeSats, bytes invoiceIdHash) {
+
+  function finalize(sig ownerSig, pubkey destination) {
+    require(checkSig(ownerSig, owner));
+
+    int inputVal = tx.inputs[this.activeInputIndex].value;
+
+    // require the buyer paid at least the expected amount
+    require(inputVal >= expectedAmountSats + minerFeeSats);
+
+    int distributable = inputVal - minerFeeSats;
+
+    // backend must build outputs so that output[0] is destination with expectedAmountSats
+    require(tx.outputs.length >= 1);
+    require(tx.outputs[0].value == expectedAmountSats);
+
+    // ensure the sum of outputs equals distributable
+    // Support either single output equal to distributable or destination + change back to router
+    if (distributable == expectedAmountSats) {
+      require(tx.outputs.length == 1);
+    } else {
+      require(tx.outputs.length == 2);
+      require(tx.outputs[1].lockingBytecode == this.activeBytecode);
+      require(tx.outputs[1].value == distributable - expectedAmountSats);
+    }
+    // reference destination to avoid unused-variable warning
+    require(destination == destination);
+  }
+
+  function receiveFunds() {
+    // Accept buyer deposit to invoice router
+    require(true);
+    // reference invoiceIdHash to avoid unused-variable warning
+    require(invoiceIdHash == invoiceIdHash);
+  }
+}

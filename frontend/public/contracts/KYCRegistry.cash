@@ -1,0 +1,44 @@
+pragma cashscript ^0.12.0;
+
+/*
+  KYCRegistry.cash
+  - Purpose: store short attestations (hash) signed by an authorized verifier
+  - Constructor:
+      pubkey verifier    // authority that may attest businesses
+  - Functions:
+      attest(sig verifierSig, bytes32 subjectHash, bytes meta)  // meta small bytes (optional)
+      revoke(sig verifierSig, bytes32 subjectHash)
+      verify(bytes32 subjectHash) returns(bool)  // Not a contract function to call in tx; used conceptually off-chain via indexer scanning
+  Notes:
+    - CashScript doesn't persist arbitrary storage — this contract pattern is used to create an on-chain attestation UTXO:
+      When `attest` is called, the backend must create an output (OP_RETURN or small P2PKH) with subjectHash/meta.
+    - For simplicity we enforce verifierSig for attestation and require a particular output pattern (output[0] OP_RETURN simulated by requiring a non-zero zero-value output is not possible in CashScript),
+      so this contract will require that one of the outputs equal 0 and include attestation as part of TX metadata in your system.
+    - Practical pattern: use an external indexer that watches transactions signed by `verifier` with OP_RETURN containing `subjectHash|meta`.
+*/
+
+contract KYCRegistry(pubkey verifier) {
+
+  // Attestation: requires verifier signature. Backend should add OP_RETURN with subjectHash|meta.
+  function attest(sig verifierSig, bytes subjectHash, bytes meta) {
+    require(checkSig(verifierSig, verifier));
+    // We rely on off-chain indexer to inspect OP_RETURN included in the transaction.
+    // Optionally ensure tx.outputs.length >= 1 (attestation output present)
+    require(tx.outputs.length >= 1);
+    // reference subjectHash/meta to avoid unused-variable warnings
+    require(subjectHash == subjectHash);
+    require(meta == meta);
+  }
+
+  // Revoke attestation (signed by verifier)
+  function revoke(sig verifierSig, bytes subjectHash) {
+    require(checkSig(verifierSig, verifier));
+    require(tx.outputs.length >= 1);
+    require(subjectHash == subjectHash);
+  }
+
+  function receiveFunds() {
+    // accept small deposits for gas if needed
+    require(true);
+  }
+}

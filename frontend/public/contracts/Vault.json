@@ -1,0 +1,127 @@
+{
+  "contractName": "Vault",
+  "constructorInputs": [
+    {
+      "name": "owner",
+      "type": "pubkey"
+    },
+    {
+      "name": "spendLimitSats",
+      "type": "int"
+    },
+    {
+      "name": "minerFeeSats",
+      "type": "int"
+    },
+    {
+      "name": "emergencyPubkey",
+      "type": "pubkey"
+    },
+    {
+      "name": "emergencyUnlockTime",
+      "type": "int"
+    }
+  ],
+  "abi": [
+    {
+      "name": "spend",
+      "inputs": [
+        {
+          "name": "ownerSig",
+          "type": "sig"
+        },
+        {
+          "name": "amountSats",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "emergencyWithdraw",
+      "inputs": [
+        {
+          "name": "emergencySig",
+          "type": "sig"
+        }
+      ]
+    },
+    {
+      "name": "receiveFunds",
+      "inputs": []
+    }
+  ],
+  "bytecode": "OP_5 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_6 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_5 OP_PICK OP_GREATERTHANOREQUAL OP_VERIFY OP_INPUTINDEX OP_UTXOVALUE OP_2DUP OP_LESSTHAN OP_VERIFY OP_SWAP OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_0 OP_OUTPUTVALUE OP_5 OP_PICK OP_NUMEQUALVERIFY OP_DUP OP_5 OP_PICK OP_NUMEQUAL OP_IF OP_TXOUTPUTCOUNT OP_1 OP_NUMEQUALVERIFY OP_ELSE OP_TXOUTPUTCOUNT OP_2 OP_NUMEQUALVERIFY OP_1 OP_OUTPUTBYTECODE OP_ACTIVEBYTECODE OP_EQUALVERIFY OP_1 OP_OUTPUTVALUE OP_OVER OP_6 OP_PICK OP_SUB OP_NUMEQUALVERIFY OP_ENDIF OP_2DROP OP_2DROP OP_DROP OP_1 OP_ELSE OP_5 OP_PICK OP_1 OP_NUMEQUAL OP_IF OP_TXLOCKTIME OP_5 OP_ROLL OP_GREATERTHANOREQUAL OP_VERIFY OP_5 OP_ROLL OP_4 OP_ROLL OP_CHECKSIGVERIFY OP_INPUTINDEX OP_UTXOVALUE OP_DUP OP_4 OP_PICK OP_GREATERTHAN OP_VERIFY OP_3 OP_ROLL OP_SUB OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_0 OP_OUTPUTVALUE OP_NUMEQUAL OP_NIP OP_NIP OP_NIP OP_ELSE OP_5 OP_ROLL OP_2 OP_NUMEQUALVERIFY OP_1 OP_VERIFY OP_2DROP OP_2DROP OP_DROP OP_1 OP_ENDIF OP_ENDIF",
+  "source": "pragma cashscript ^0.12.0;\n\n/*\n  Vault.cash\n  - Single-owner vault\n  - Constructor:\n      pubkey owner,\n      int spendLimitSats,\n      int minerFeeSats,\n      pubkey emergencyPubkey,\n      int emergencyUnlockTime\n  - Functions:\n      spend(sig ownerSig, pubkey recipient, int amountSats)\n      emergencyWithdraw(sig emergencySig, pubkey recipient)\n      receiveFunds()\n  Notes:\n    - Backend must set the active input to the contract UTXO used.\n    - Backend must construct outputs so: sum(outputs) == inputVal - minerFeeSats.\n    - output[0] MUST be recipient with value == amountSats.\n    - emergencyWithdraw requires tx.locktime >= emergencyUnlockTime.\n*/\n\ncontract Vault(pubkey owner, int spendLimitSats, int minerFeeSats, pubkey emergencyPubkey, int emergencyUnlockTime) {\n\n  function spend(sig ownerSig, int amountSats) {\n    require(checkSig(ownerSig, owner));\n    require(amountSats <= spendLimitSats);\n\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    require(tx.outputs.length >= 1);\n    require(tx.outputs[0].value == amountSats);\n\n    // No loops in this compiler version; require either single output equal to distributable\n    // or exactly two outputs: recipient + change back to this contract.\n    if (distributable == amountSats) {\n      require(tx.outputs.length == 1);\n    } else {\n      require(tx.outputs.length == 2);\n      require(tx.outputs[1].lockingBytecode == this.activeBytecode);\n      require(tx.outputs[1].value == distributable - amountSats);\n    }\n  }\n\n  function emergencyWithdraw(sig emergencySig) {\n    require(tx.locktime >= emergencyUnlockTime);\n    require(checkSig(emergencySig, emergencyPubkey));\n\n    int inputVal = tx.inputs[this.activeInputIndex].value;\n    require(inputVal > minerFeeSats);\n    int distributable = inputVal - minerFeeSats;\n\n    require(tx.outputs.length >= 1);\n    require(tx.outputs[0].value == distributable);\n  }\n\n  function receiveFunds() {\n    // Accept incoming funds with no checks\n    require(true);\n  }\n}\n",
+  "debug": {
+    "bytecode": "5579009c63567a7cad5579a269c0c66e9f697c94c451a26900cc55799d7655799c63c4519d67c4529d51cdc18851cc785679949d686d6d7551675579519c63c5557aa269557a547aadc0c6765479a069537a94c451a26900cc9c77777767557a529d51696d6d75516868",
+    "sourceMap": "25:2:45:3;;;;;26:21:26:29;;:31::36;:4::39:1;27:12:27:22:0;;:::40:1;:4::42;29:29:29:50:0;:19::57:1;30:12:30:35:0;::::1;:4::37;31:35:31:47:0;:24:::1;33:12:33:29:0;:33::34;:12:::1;:4::36;34:23:34:24:0;:12::31:1;:35::45:0;;:4::47:1;38:8:38:21:0;:25::35;;:8:::1;:37:40:5:0;39:14:39:31;:35::36;:6::38:1;40:11:44:5:0;41:14:41:31;:35::36;:6::38:1;42:25:42:26:0;:14::43:1;:47::66:0;:6::68:1;43:25:43:26:0;:14::33:1;:37::50:0;:53::63;;:37:::1;:6::65;40:11:44:5;25:2:45:3;;;;;47::57::0;;;;;48:12:48:23;:27::46;;:12:::1;:4::48;49:21:49:33:0;;:35::50;;:4::53:1;51:29:51:50:0;:19::57:1;52:12:52:20:0;:23::35;;:12:::1;:4::37;53:35:53:47:0;;:24:::1;55:12:55:29:0;:33::34;:12:::1;:4::36;56:23:56:24:0;:12::31:1;:4::50;47:2:57:3;;;;59::62::0;;;;61:12:61:16;:4::18:1;59:2:62:3;;;;23:0:63:1;",
+    "logs": [],
+    "requires": [
+      {
+        "ip": 13,
+        "line": 26
+      },
+      {
+        "ip": 17,
+        "line": 27
+      },
+      {
+        "ip": 22,
+        "line": 30
+      },
+      {
+        "ip": 28,
+        "line": 33
+      },
+      {
+        "ip": 33,
+        "line": 34
+      },
+      {
+        "ip": 41,
+        "line": 39
+      },
+      {
+        "ip": 45,
+        "line": 41
+      },
+      {
+        "ip": 49,
+        "line": 42
+      },
+      {
+        "ip": 56,
+        "line": 43
+      },
+      {
+        "ip": 72,
+        "line": 48
+      },
+      {
+        "ip": 77,
+        "line": 49
+      },
+      {
+        "ip": 84,
+        "line": 52
+      },
+      {
+        "ip": 91,
+        "line": 55
+      },
+      {
+        "ip": 95,
+        "line": 56
+      },
+      {
+        "ip": 104,
+        "line": 61
+      }
+    ]
+  },
+  "compiler": {
+    "name": "cashc",
+    "version": "0.12.0"
+  },
+  "updatedAt": "2025-11-22T11:46:33.346Z"
+}

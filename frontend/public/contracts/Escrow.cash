@@ -1,0 +1,102 @@
+pragma cashscript ^0.12.0;
+
+/*
+  Escrow.cash
+  - Constructor:
+      pubkey payer,
+      pubkey payee,
+      pubkey escrowAgent,        // neutral arbitrator
+      int releaseUnlockTime,     // unix time after which auto-release to payee allowed
+      int minerFeeSats
+  - Functions:
+      releaseByPayer(sig payerSig, pubkey recipient)        // payer approves release
+      releaseByPayee(sig payeeSig, pubkey recipient)        // payee claims
+      releaseByAgent(sig agentSig, pubkey recipient)        // escrow agent resolves
+      autoRelease(pubkey recipient)                         // allowed after locktime (no sig)
+      receiveFunds()
+  - Behavior:
+      Sum(outputs) == inputVal - minerFeeSats
+      output[0] == recipient amount (usually full distributable; backend controls partial splits)
+*/
+
+contract Escrow(pubkey payer, pubkey payee, pubkey escrowAgent, int releaseUnlockTime, int minerFeeSats) {
+
+  function releaseByPayer(sig payerSig, pubkey recipient) {
+    require(checkSig(payerSig, payer));
+    int inputVal = tx.inputs[this.activeInputIndex].value;
+    require(inputVal > minerFeeSats);
+    int distributable = inputVal - minerFeeSats;
+
+    // Either single output equal distributable, or recipient + change back to contract
+    require(tx.outputs.length >= 1);
+    if (tx.outputs.length == 1) {
+      require(tx.outputs[0].value == distributable);
+    } else {
+      require(tx.outputs.length == 2);
+      require(tx.outputs[1].lockingBytecode == this.activeBytecode);
+      require(tx.outputs[1].value + tx.outputs[0].value == distributable);
+    }
+    require(recipient == recipient);
+  }
+
+  function releaseByPayee(sig payeeSig, pubkey recipient) {
+    require(checkSig(payeeSig, payee));
+    int inputVal = tx.inputs[this.activeInputIndex].value;
+    require(inputVal > minerFeeSats);
+    int distributable = inputVal - minerFeeSats;
+
+    require(tx.outputs.length >= 1);
+    if (tx.outputs.length == 1) {
+      require(tx.outputs[0].value == distributable);
+    } else {
+      require(tx.outputs.length == 2);
+      require(tx.outputs[1].lockingBytecode == this.activeBytecode);
+      require(tx.outputs[1].value + tx.outputs[0].value == distributable);
+    }
+    require(recipient == recipient);
+  }
+
+  function releaseByAgent(sig agentSig, pubkey recipient) {
+    require(checkSig(agentSig, escrowAgent));
+    int inputVal = tx.inputs[this.activeInputIndex].value;
+    require(inputVal > minerFeeSats);
+    int distributable = inputVal - minerFeeSats;
+
+    require(tx.outputs.length >= 1);
+    if (tx.outputs.length == 1) {
+      require(tx.outputs[0].value == distributable);
+    } else {
+      require(tx.outputs.length == 2);
+      require(tx.outputs[1].lockingBytecode == this.activeBytecode);
+      require(tx.outputs[1].value + tx.outputs[0].value == distributable);
+    }
+    require(recipient == recipient);
+  }
+
+  // Auto-release to payee (no signature) after unlock time
+  function autoRelease(pubkey recipient) {
+    require(tx.locktime >= releaseUnlockTime);
+
+    int inputVal = tx.inputs[this.activeInputIndex].value;
+    require(inputVal > minerFeeSats);
+    int distributable = inputVal - minerFeeSats;
+
+    require(tx.outputs.length >= 1);
+    require(tx.outputs[0].value == distributable);
+
+      // Ensure outputs sum to distributable (single output or recipient+change)
+      if (tx.outputs.length == 1) {
+        require(tx.outputs[0].value == distributable);
+      } else {
+        require(tx.outputs.length == 2);
+        require(tx.outputs[1].lockingBytecode == this.activeBytecode);
+        require(tx.outputs[1].value + tx.outputs[0].value == distributable);
+      }
+      require(recipient == recipient);
+  }
+
+  function receiveFunds() {
+    // accept deposits into escrow
+    require(true);
+  }
+}

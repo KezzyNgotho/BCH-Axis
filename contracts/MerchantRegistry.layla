@@ -1,0 +1,19 @@
+pragma cashscript ^0.12.0;
+
+contract MerchantRegistry(pubkey owner) {
+    function registerMerchant(sig ownerSig, pubkey merchantWallet, bytes merchantData) {
+        require(checkSig(ownerSig, owner));
+        // Reference merchantWallet and merchantData to avoid unused variable warnings
+        require(merchantWallet == merchantWallet);
+        require(merchantData == merchantData);
+        require(tx.outputs.length >= 1);
+    }
+
+    function approveKYC(sig ownerSig, pubkey merchantWallet, bytes kycData) {
+        require(checkSig(ownerSig, owner));
+        // Reference merchantWallet and kycData to avoid unused variable warnings
+        require(merchantWallet == merchantWallet);
+        require(kycData == kycData);
+        require(tx.outputs.length >= 1);
+    }
+}

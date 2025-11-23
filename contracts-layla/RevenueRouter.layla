@@ -1,0 +1,80 @@
+// Layla Chips version of RevenueRouter
+// TODO: Adapt logic from RevenueRouter.cash if needed
+pragma cashscript ^0.12.0;
+
+/*
+	RevenueRouter.cash
+	- Constructor:
+			pubkey owner,
+			pubkey[] recipients,
+			int[] basisPoints,     // parts per 10,000
+			int minerFeeSats
+	- Function:
+			distribute(sig ownerSig)
+		Behavior:
+			- ownerSig required
+			- total = tx.inputs[this.activeInputIndex].value
+			- distributable = total - minerFeeSats
+			- compute amounts for recipients[0..n-2] as floor(distributable * bp / 10000)
+			- last recipient gets distributable - sum(computed)
+			- require tx.outputs.length == recipients.length
+			- require tx.outputs[i].value == computedAmount[i]
+*/
+
+contract RevenueRouter(pubkey owner,
+											 pubkey recipient0, pubkey recipient1, pubkey recipient2, pubkey recipient3,
+											 int bp0, int bp1, int bp2, int bp3,
+											 int recipientsCount,
+											 int minerFeeSats) {
+
+	function distribute(sig ownerSig) {
+		require(checkSig(ownerSig, owner));
+
+		int total = tx.inputs[this.activeInputIndex].value;
+		require(total > minerFeeSats);
+		int distributable = total - minerFeeSats;
+
+		// require outputs length equal recipientsCount
+		require(recipientsCount >= 1 && recipientsCount <= 4);
+		require(tx.outputs.length == recipientsCount);
+
+		if (recipientsCount == 1) {
+			require(tx.outputs[0].value == distributable);
+		} else if (recipientsCount == 2) {
+			int amt0 = (distributable * bp0) / 10000;
+			require(tx.outputs[0].value == amt0);
+			int amt1 = distributable - amt0;
+			require(tx.outputs[1].value == amt1);
+		} else if (recipientsCount == 3) {
+			int amt0 = (distributable * bp0) / 10000;
+			int amt1 = (distributable * bp1) / 10000;
+			require(tx.outputs[0].value == amt0);
+			require(tx.outputs[1].value == amt1);
+			int amt2 = distributable - amt0 - amt1;
+			require(tx.outputs[2].value == amt2);
+		} else {
+			int amt0 = (distributable * bp0) / 10000;
+			int amt1 = (distributable * bp1) / 10000;
+			int amt2 = (distributable * bp2) / 10000;
+			require(tx.outputs[0].value == amt0);
+			require(tx.outputs[1].value == amt1);
+			require(tx.outputs[2].value == amt2);
+			int amt3 = distributable - amt0 - amt1 - amt2;
+			require(tx.outputs[3].value == amt3);
+		}
+		// Use recipient variables to avoid unused-variable compile errors
+		if (recipientsCount >= 1) { require(recipient0 == recipient0); }
+		if (recipientsCount >= 2) { require(recipient1 == recipient1); }
+		if (recipientsCount >= 3) { require(recipient2 == recipient2); }
+		if (recipientsCount >= 4) { require(recipient3 == recipient3); }
+		// Reference basis point variables to avoid unused-variable warnings
+		require(bp0 == bp0);
+		require(bp1 == bp1);
+		require(bp2 == bp2);
+		require(bp3 == bp3);
+	}
+
+	function receiveFunds() {
+		require(true);
+	}
+}

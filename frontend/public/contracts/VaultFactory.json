@@ -1,0 +1,54 @@
+{
+  "contractName": "Vault",
+  "constructorInputs": [
+    {
+      "name": "owner",
+      "type": "pubkey"
+    }
+  ],
+  "abi": [
+    {
+      "name": "spend",
+      "inputs": [
+        {
+          "name": "ownerSig",
+          "type": "sig"
+        },
+        {
+          "name": "amount",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "receiveFunds",
+      "inputs": []
+    }
+  ],
+  "bytecode": "OP_OVER OP_0 OP_NUMEQUAL OP_IF OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_SWAP 40420f OP_LESSTHANOREQUAL OP_NIP OP_ELSE OP_SWAP OP_1 OP_NUMEQUALVERIFY OP_DROP OP_1 OP_ENDIF",
+  "source": "pragma cashscript ^0.12.0;\n\n/*\n  Vault Contract\n  - Single owner\n  - Spending limit\n  - Accepts BCH\n*/\n\ncontract Vault(pubkey owner) {\n\n  // Owner can spend funds\n  function spend(sig ownerSig, int amount) {\n    require(checkSig(ownerSig, owner));\n    require(amount <= 1000000); // spending limit in satoshis\n  }\n\n  // Accept BCH (no-op function)\n  function receiveFunds() {\n    require(true);\n  }\n}\n",
+  "debug": {
+    "bytecode": "78009c637b7cad7c0340420fa177677c519d755168",
+    "sourceMap": "13:2:16:3;;;;14:21:14:29;:31::36;:4::39:1;15:12:15:18:0;:22::29;:4::31:1;13:2:16:3;;19::21::0;;;::::1;;10:0:22:1",
+    "logs": [],
+    "requires": [
+      {
+        "ip": 7,
+        "line": 14
+      },
+      {
+        "ip": 11,
+        "line": 15
+      },
+      {
+        "ip": 17,
+        "line": 20
+      }
+    ]
+  },
+  "compiler": {
+    "name": "cashc",
+    "version": "0.12.0"
+  },
+  "updatedAt": "2025-11-22T11:03:28.126Z"
+}

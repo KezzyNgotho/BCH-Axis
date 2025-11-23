@@ -1,0 +1,12 @@
+pragma cashscript ^0.12.0;
+
+contract TestLoop1() {
+  function f() {
+    int sum = 0;
+    int i = 0;
+    while (i < 2) {
+      sum = sum + i;
+      i = i + 1;
+    }
+  }
+}

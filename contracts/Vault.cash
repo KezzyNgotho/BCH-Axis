@@ -1,0 +1,63 @@
+pragma cashscript ^0.12.0;
+
+/*
+  Vault.cash
+  - Single-owner vault
+  - Constructor:
+      pubkey owner,
+      int spendLimitSats,
+      int minerFeeSats,
+      pubkey emergencyPubkey,
+      int emergencyUnlockTime
+  - Functions:
+      spend(sig ownerSig, pubkey recipient, int amountSats)
+      emergencyWithdraw(sig emergencySig, pubkey recipient)
+      receiveFunds()
+  Notes:
+    - Backend must set the active input to the contract UTXO used.
+    - Backend must construct outputs so: sum(outputs) == inputVal - minerFeeSats.
+    - output[0] MUST be recipient with value == amountSats.
+    - emergencyWithdraw requires tx.locktime >= emergencyUnlockTime.
+*/
+
+contract Vault(pubkey owner, int spendLimitSats, int minerFeeSats, pubkey emergencyPubkey, int emergencyUnlockTime) {
+
+  function spend(sig ownerSig, int amountSats) {
+    require(checkSig(ownerSig, owner));
+    require(amountSats <= spendLimitSats);
+
+    int inputVal = tx.inputs[this.activeInputIndex].value;
+    require(inputVal > minerFeeSats);
+    int distributable = inputVal - minerFeeSats;
+
+    require(tx.outputs.length >= 1);
+    require(tx.outputs[0].value == amountSats);
+
+    // No loops in this compiler version; require either single output equal to distributable
+    // or exactly two outputs: recipient + change back to this contract.
+    if (distributable == amountSats) {
+      require(tx.outputs.length == 1);
+    } else {
+      require(tx.outputs.length == 2);
+      require(tx.outputs[1].lockingBytecode == this.activeBytecode);
+      require(tx.outputs[1].value == distributable - amountSats);
+    }
+  }
+
+  function emergencyWithdraw(sig emergencySig) {
+    require(tx.locktime >= emergencyUnlockTime);
+    require(checkSig(emergencySig, emergencyPubkey));
+
+    int inputVal = tx.inputs[this.activeInputIndex].value;
+    require(inputVal > minerFeeSats);
+    int distributable = inputVal - minerFeeSats;
+
+    require(tx.outputs.length >= 1);
+    require(tx.outputs[0].value == distributable);
+  }
+
+  function receiveFunds() {
+    // Accept incoming funds with no checks
+    require(true);
+  }
+}
