@@ -1,6 +1,6 @@
 {
   "network": "testnet",
-  "timestamp": "2025-11-23T04:34:07.272Z",
+  "timestamp": "2025-11-23T11:27:25.265Z",
   "deployer": {
     "address": "bchtest:qqup3csyywvyeywmyqct0tn0tjra75lmmcf2zv5wqq",
     "publicKey": {
@@ -38,15 +38,15 @@
       "31": 108,
       "32": 60
     },
-    "balanceSats": 999918699
+    "balanceSats": 999861719
   },
   "contracts": {
     "Escrow": {
       "name": "Escrow",
       "file": "Escrow.json",
       "address": "bchtest:qr35zwmyeuvj5vwwsdd9zksn8mkf00k70yrfuxuhk7",
-      "txid": "{\"txId\":\"2f5e20f03bdafbace90c865a2a414fc436176ec038f8dc101d3d175a6910a8ab\",\"balance\":{\"bch\":9.99913479,\"sat\":999913479,\"usd\":5435.31},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/2f5e20f03bdafbace90c865a2a414fc436176ec038f8dc101d3d175a6910a8ab\",\"tokenIds\":[]}",
-      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"2f5e20f03bdafbace90c865a2a414fc436176ec038f8dc101d3d175a6910a8ab\",\"balance\":{\"bch\":9.99913479,\"sat\":999913479,\"usd\":5435.31},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/2f5e20f03bdafbace90c865a2a414fc436176ec038f8dc101d3d175a6910a8ab\",\"tokenIds\":[]}",
+      "txid": "{\"txId\":\"f5b267c43215eaecd5cb9c2cd97824cdef457c4e028c85158c7d950d25c9bf48\",\"balance\":{\"bch\":9.99856499,\"sat\":999856499,\"usd\":5507.92},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/f5b267c43215eaecd5cb9c2cd97824cdef457c4e028c85158c7d950d25c9bf48\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"f5b267c43215eaecd5cb9c2cd97824cdef457c4e028c85158c7d950d25c9bf48\",\"balance\":{\"bch\":9.99856499,\"sat\":999856499,\"usd\":5507.92},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/f5b267c43215eaecd5cb9c2cd97824cdef457c4e028c85158c7d950d25c9bf48\",\"tokenIds\":[]}",
       "artifact": {
         "contractName": "Escrow",
         "constructorInputs": [
@@ -282,8 +282,8 @@
       "name": "FeeSplitter",
       "file": "FeeSplitter.json",
       "address": "bchtest:qz84xcnk94t3qxskzutyfv0xqe0n9fsx7szdnnk02h",
-      "txid": "{\"txId\":\"cf89120703117b85cb7ba0ab415e7a217fd283fc847635177d5f7d0158e8230c\",\"balance\":{\"bch\":9.99908259,\"sat\":999908259,\"usd\":5435.28},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/cf89120703117b85cb7ba0ab415e7a217fd283fc847635177d5f7d0158e8230c\",\"tokenIds\":[]}",
-      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"cf89120703117b85cb7ba0ab415e7a217fd283fc847635177d5f7d0158e8230c\",\"balance\":{\"bch\":9.99908259,\"sat\":999908259,\"usd\":5435.28},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/cf89120703117b85cb7ba0ab415e7a217fd283fc847635177d5f7d0158e8230c\",\"tokenIds\":[]}",
+      "txid": "{\"txId\":\"836c3202b43d759c50aa30d798d983ec711c751cc60ec3079bfc1eb4ea5a40c1\",\"balance\":{\"bch\":9.99851279,\"sat\":999851279,\"usd\":5507.89},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/836c3202b43d759c50aa30d798d983ec711c751cc60ec3079bfc1eb4ea5a40c1\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"836c3202b43d759c50aa30d798d983ec711c751cc60ec3079bfc1eb4ea5a40c1\",\"balance\":{\"bch\":9.99851279,\"sat\":999851279,\"usd\":5507.89},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/836c3202b43d759c50aa30d798d983ec711c751cc60ec3079bfc1eb4ea5a40c1\",\"tokenIds\":[]}",
       "artifact": {
         "contractName": "FeeSplitter",
         "constructorInputs": [
@@ -468,8 +468,8 @@
       "name": "KYCRegistry",
       "file": "KYCRegistry.json",
       "address": "bchtest:qzy633wgvs4w8cqurhql5m37ejt25805evhuuwazxg",
-      "txid": "{\"txId\":\"3a1fc738cb514202a648aec56dde82000c10b373aacfdd56078ef272ad7fe1f7\",\"balance\":{\"bch\":9.99903039,\"sat\":999903039,\"usd\":5435.25},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/3a1fc738cb514202a648aec56dde82000c10b373aacfdd56078ef272ad7fe1f7\",\"tokenIds\":[]}",
-      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"3a1fc738cb514202a648aec56dde82000c10b373aacfdd56078ef272ad7fe1f7\",\"balance\":{\"bch\":9.99903039,\"sat\":999903039,\"usd\":5435.25},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/3a1fc738cb514202a648aec56dde82000c10b373aacfdd56078ef272ad7fe1f7\",\"tokenIds\":[]}",
+      "txid": "{\"txId\":\"18988a972ab7c9ec6e4fb632eda7b6a1631f76172368d80f0d06b370c6668a84\",\"balance\":{\"bch\":9.99846059,\"sat\":999846059,\"usd\":5507.87},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/18988a972ab7c9ec6e4fb632eda7b6a1631f76172368d80f0d06b370c6668a84\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"18988a972ab7c9ec6e4fb632eda7b6a1631f76172368d80f0d06b370c6668a84\",\"balance\":{\"bch\":9.99846059,\"sat\":999846059,\"usd\":5507.87},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/18988a972ab7c9ec6e4fb632eda7b6a1631f76172368d80f0d06b370c6668a84\",\"tokenIds\":[]}",
       "artifact": {
         "contractName": "KYCRegistry",
         "constructorInputs": [
@@ -567,8 +567,8 @@
       "name": "LiquidityBuffer",
       "file": "LIquidityBuffer.json",
       "address": "bchtest:qq9evm09szj0yhn6kxu6t0zyxd24ekghwvs4yuc4ct",
-      "txid": "{\"txId\":\"df7184b4462b65548662b2a0a4a2ad9dec5551c12a65f5edc87b3cf2248e1aa8\",\"balance\":{\"bch\":9.99897819,\"sat\":999897819,\"usd\":5435.22},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/df7184b4462b65548662b2a0a4a2ad9dec5551c12a65f5edc87b3cf2248e1aa8\",\"tokenIds\":[]}",
-      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"df7184b4462b65548662b2a0a4a2ad9dec5551c12a65f5edc87b3cf2248e1aa8\",\"balance\":{\"bch\":9.99897819,\"sat\":999897819,\"usd\":5435.22},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/df7184b4462b65548662b2a0a4a2ad9dec5551c12a65f5edc87b3cf2248e1aa8\",\"tokenIds\":[]}",
+      "txid": "{\"txId\":\"e31d3343bfad250bb4b9ed514763c45747c4d3118a5e1aef0ffe11cc64400a6a\",\"balance\":{\"bch\":9.99840839,\"sat\":999840839,\"usd\":5507.84},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/e31d3343bfad250bb4b9ed514763c45747c4d3118a5e1aef0ffe11cc64400a6a\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"e31d3343bfad250bb4b9ed514763c45747c4d3118a5e1aef0ffe11cc64400a6a\",\"balance\":{\"bch\":9.99840839,\"sat\":999840839,\"usd\":5507.84},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/e31d3343bfad250bb4b9ed514763c45747c4d3118a5e1aef0ffe11cc64400a6a\",\"tokenIds\":[]}",
       "artifact": {
         "contractName": "LiquidityBuffer",
         "constructorInputs": [
@@ -714,8 +714,8 @@
       "name": "MerchantRegistry",
       "file": "MerchantRegistry.json",
       "address": "bchtest:qrjfxafd5fu70vv2w8zm00rtws7uu6shdv97tved78",
-      "txid": "{\"txId\":\"1b22099647c181124c15b6c7d45c600e9931cd3f33fda271f9f6eae4a7871c31\",\"balance\":{\"bch\":9.99892599,\"sat\":999892599,\"usd\":5435.19},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/1b22099647c181124c15b6c7d45c600e9931cd3f33fda271f9f6eae4a7871c31\",\"tokenIds\":[]}",
-      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"1b22099647c181124c15b6c7d45c600e9931cd3f33fda271f9f6eae4a7871c31\",\"balance\":{\"bch\":9.99892599,\"sat\":999892599,\"usd\":5435.19},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/1b22099647c181124c15b6c7d45c600e9931cd3f33fda271f9f6eae4a7871c31\",\"tokenIds\":[]}",
+      "txid": "{\"txId\":\"8fb046d5dd3401be15268428ca4eb84834ec3b560801c68a7737c4a7fd2db1f9\",\"balance\":{\"bch\":9.99835619,\"sat\":999835619,\"usd\":5507.81},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/8fb046d5dd3401be15268428ca4eb84834ec3b560801c68a7737c4a7fd2db1f9\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"8fb046d5dd3401be15268428ca4eb84834ec3b560801c68a7737c4a7fd2db1f9\",\"balance\":{\"bch\":9.99835619,\"sat\":999835619,\"usd\":5507.81},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/8fb046d5dd3401be15268428ca4eb84834ec3b560801c68a7737c4a7fd2db1f9\",\"tokenIds\":[]}",
       "artifact": {
         "contractName": "MerchantRegistry",
         "constructorInputs": [
@@ -813,8 +813,8 @@
       "name": "MultiSigVault",
       "file": "MultiSigVault.json",
       "address": "bchtest:qrze4pt5d0dyxf384xu7t44kpy2alvgzku2zlj480l",
-      "txid": "{\"txId\":\"fa49092e1a5de3b27c80f5e2ed9cab4f312811d454d285e958f5c2658d983a59\",\"balance\":{\"bch\":9.99882379,\"sat\":999882379,\"usd\":5435.14},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/fa49092e1a5de3b27c80f5e2ed9cab4f312811d454d285e958f5c2658d983a59\",\"tokenIds\":[]}",
-      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"fa49092e1a5de3b27c80f5e2ed9cab4f312811d454d285e958f5c2658d983a59\",\"balance\":{\"bch\":9.99882379,\"sat\":999882379,\"usd\":5435.14},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/fa49092e1a5de3b27c80f5e2ed9cab4f312811d454d285e958f5c2658d983a59\",\"tokenIds\":[]}",
+      "txid": "{\"txId\":\"335dccd2be08e9cd2fedfb9481075ce94a7cc4adcf6819359da18c37b950934f\",\"balance\":{\"bch\":9.99825399,\"sat\":999825399,\"usd\":5507.75},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/335dccd2be08e9cd2fedfb9481075ce94a7cc4adcf6819359da18c37b950934f\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"335dccd2be08e9cd2fedfb9481075ce94a7cc4adcf6819359da18c37b950934f\",\"balance\":{\"bch\":9.99825399,\"sat\":999825399,\"usd\":5507.75},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/335dccd2be08e9cd2fedfb9481075ce94a7cc4adcf6819359da18c37b950934f\",\"tokenIds\":[]}",
       "artifact": {
         "contractName": "MultiSigVault",
         "constructorInputs": [
@@ -952,8 +952,8 @@
       "name": "PaymentRouter",
       "file": "PaymentRouter.json",
       "address": "bchtest:qra23ehkceejq8xawfntvl9d6vtupsn9a53zlpksxx",
-      "txid": "{\"txId\":\"72836558350f533870f600f86752ba704cdf0f2491473ae052db21a8a2683dba\",\"balance\":{\"bch\":9.99877159,\"sat\":999877159,\"usd\":5435.11},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/72836558350f533870f600f86752ba704cdf0f2491473ae052db21a8a2683dba\",\"tokenIds\":[]}",
-      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"72836558350f533870f600f86752ba704cdf0f2491473ae052db21a8a2683dba\",\"balance\":{\"bch\":9.99877159,\"sat\":999877159,\"usd\":5435.11},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/72836558350f533870f600f86752ba704cdf0f2491473ae052db21a8a2683dba\",\"tokenIds\":[]}",
+      "txid": "{\"txId\":\"fcf3e511f64203981544c5cafbe979dcc194e24a8c589a2affa005949ff4847c\",\"balance\":{\"bch\":9.99820179,\"sat\":999820179,\"usd\":5507.72},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/fcf3e511f64203981544c5cafbe979dcc194e24a8c589a2affa005949ff4847c\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"fcf3e511f64203981544c5cafbe979dcc194e24a8c589a2affa005949ff4847c\",\"balance\":{\"bch\":9.99820179,\"sat\":999820179,\"usd\":5507.72},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/fcf3e511f64203981544c5cafbe979dcc194e24a8c589a2affa005949ff4847c\",\"tokenIds\":[]}",
       "artifact": {
         "contractName": "PaymentRouter",
         "constructorInputs": [
@@ -1058,8 +1058,8 @@
       "name": "RevenueRouter",
       "file": "RevenueRouter.json",
       "address": "bchtest:qpyz9yt9cl6j6vkw60ggk8waqwt7zjhr9s0my75fpa",
-      "txid": "{\"txId\":\"0791000c3bf5d9fca1a9ce45814272f556f306d0c306b853bb7f03f88efb7960\",\"balance\":{\"bch\":9.99871939,\"sat\":999871939,\"usd\":5435.08},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/0791000c3bf5d9fca1a9ce45814272f556f306d0c306b853bb7f03f88efb7960\",\"tokenIds\":[]}",
-      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"0791000c3bf5d9fca1a9ce45814272f556f306d0c306b853bb7f03f88efb7960\",\"balance\":{\"bch\":9.99871939,\"sat\":999871939,\"usd\":5435.08},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/0791000c3bf5d9fca1a9ce45814272f556f306d0c306b853bb7f03f88efb7960\",\"tokenIds\":[]}",
+      "txid": "{\"txId\":\"d9ad84ba706fe406b45d838c5feb17c376202cd6381cd72bf6b650f0dc69e806\",\"balance\":{\"bch\":9.99814959,\"sat\":999814959,\"usd\":5507.69},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/d9ad84ba706fe406b45d838c5feb17c376202cd6381cd72bf6b650f0dc69e806\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"d9ad84ba706fe406b45d838c5feb17c376202cd6381cd72bf6b650f0dc69e806\",\"balance\":{\"bch\":9.99814959,\"sat\":999814959,\"usd\":5507.69},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/d9ad84ba706fe406b45d838c5feb17c376202cd6381cd72bf6b650f0dc69e806\",\"tokenIds\":[]}",
       "artifact": {
         "contractName": "RevenueRouter",
         "constructorInputs": [
@@ -1236,8 +1236,8 @@
       "name": "Vault",
       "file": "VaultFactory.json",
       "address": "bchtest:qrcshkzk8wvk33ad26zl3gea8xyqhqr5zgr2qa42pf",
-      "txid": "{\"txId\":\"5861b7377b872ee50472683667948bc621e86b4135813fa65dde616ad4fd75de\",\"balance\":{\"bch\":9.99861719,\"sat\":999861719,\"usd\":5435.03},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/5861b7377b872ee50472683667948bc621e86b4135813fa65dde616ad4fd75de\",\"tokenIds\":[]}",
-      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"5861b7377b872ee50472683667948bc621e86b4135813fa65dde616ad4fd75de\",\"balance\":{\"bch\":9.99861719,\"sat\":999861719,\"usd\":5435.03},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/5861b7377b872ee50472683667948bc621e86b4135813fa65dde616ad4fd75de\",\"tokenIds\":[]}",
+      "txid": "{\"txId\":\"4e66bd69220971c95048b9edee3f25cfde28236afeeb1d04429ab090b9634cd6\",\"balance\":{\"bch\":9.99804739,\"sat\":999804739,\"usd\":5507.64},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/4e66bd69220971c95048b9edee3f25cfde28236afeeb1d04429ab090b9634cd6\",\"tokenIds\":[]}",
+      "explorer": "https://tbch.loping.net/tx/{\"txId\":\"4e66bd69220971c95048b9edee3f25cfde28236afeeb1d04429ab090b9634cd6\",\"balance\":{\"bch\":9.99804739,\"sat\":999804739,\"usd\":5507.64},\"explorerUrl\":\"https://www.blockchain.com/bch-testnet/tx/4e66bd69220971c95048b9edee3f25cfde28236afeeb1d04429ab090b9634cd6\",\"tokenIds\":[]}",
       "artifact": {
         "contractName": "Vault",
         "constructorInputs": [

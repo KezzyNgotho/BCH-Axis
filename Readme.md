@@ -226,11 +226,30 @@ Compile & Deploy Contracts
 layla compile contracts/MyContract.js
 layla deploy contracts/MyContract.js --network chipnet
 
-
 Contracts
-Contract NameDescriptionNetworkDeployed Address / TXIDMerchantPaymentHandles merchant paymentsChipnetTBDMerchantEscrowEscrow for payoutsChipnetTBDKYCVerifierTracks KYC approval statusChipnetTBD
 
-Replace TBD with your actual deployed contract addresses after deployment.
+All contracts are deployed on BCH Testnet using Layla CHIPs. Each contract is funded and ready for testing.
+
+Contract Name	Address (Testnet)	Funding (sats)	TXID / Explorer Link
+Escrow	bchtest:qr35zwmyeuvj5vwwsdd9zksn8mkf00k70yrfuxuhk7	5000	View TX
+
+FeeSplitter	bchtest:qz84xcnk94t3qxskzutyfv0xqe0n9fsx7szdnnk02h	5000	View TX
+
+KYCRegistry	bchtest:qzy633wgvs4w8cqurhql5m37ejt25805evhuuwazxg	5000	View TX
+
+LiquidityBuffer	bchtest:qq9evm09szj0yhn6kxu6t0zyxd24ekghwvs4yuc4ct	5000	View TX
+
+MerchantRegistry	bchtest:qrjfxafd5fu70vv2w8zm00rtws7uu6shdv97tved78	5000	View TX
+
+MultiSigVault	bchtest:qrze4pt5d0dyxf384xu7t44kpy2alvgzku2zlj480l	10000	View TX
+
+PaymentRouter	bchtest:qra23ehkceejq8xawfntvl9d6vtupsn9a53zlpksxx	5000	View TX
+
+RevenueRouter	bchtest:qpyz9yt9cl6j6vkw60ggk8waqwt7zjhr9s0my75fpa	5000	View TX
+
+Vault	bchtest:qrcshkzk8wvk33ad26zl3gea8xyqhqr5zgr2qa42pf	10000	View TX
+
+⚠️ Note: These are testnet addresses. For production, deploy proper P2SH locking scripts instead of funding derived addresses.
 
 
 Roadmap
