@@ -4,6 +4,10 @@
     {
       "name": "owner",
       "type": "pubkey"
+    },
+    {
+      "name": "merchantCategory",
+      "type": "bytes"
     }
   ],
   "abi": [
@@ -42,44 +46,60 @@
       ]
     }
   ],
-  "bytecode": "OP_OVER OP_0 OP_NUMEQUAL OP_IF OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_OVER OP_ROT OP_EQUALVERIFY OP_OVER OP_ROT OP_EQUAL OP_NIP OP_ELSE OP_SWAP OP_1 OP_NUMEQUALVERIFY OP_CHECKSIGVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_VERIFY OP_DUP OP_EQUALVERIFY OP_DUP OP_EQUAL OP_ENDIF",
-  "source": "pragma cashscript ^0.12.0;\n\n/*\n  MerchantRegistry Contract (CashScript compatible)\n  - Handles merchant onboarding via OP_RETURN\n  - Owner can approve KYC by signing a transaction\n  - All merchant data is stored off-chain or in OP_RETURN\n*/\n\ncontract MerchantRegistry(pubkey owner) {\n\n  // Register merchant: backend should add OP_RETURN with merchant data\n  function registerMerchant(sig ownerSig, pubkey merchantWallet, bytes merchantData) {\n    require(checkSig(ownerSig, owner));\n    // Require at least one output (OP_RETURN with merchantData)\n    require(tx.outputs.length >= 1);\n    // Optionally: check that merchantWallet is referenced in merchantData\n    require(merchantWallet == merchantWallet);\n    require(merchantData == merchantData);\n  }\n\n  // Approve KYC: backend should add OP_RETURN with KYC approval data\n  function approveKYC(sig ownerSig, pubkey merchantWallet, bytes kycData) {\n    require(checkSig(ownerSig, owner));\n    require(tx.outputs.length >= 1);\n    require(merchantWallet == merchantWallet);\n    require(kycData == kycData);\n  }\n}",
+  "bytecode": "OP_2 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_3 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_0 OP_UTXOTOKENCATEGORY OP_EQUALVERIFY OP_0 OP_UTXOTOKENAMOUNT OP_1 OP_NUMEQUALVERIFY OP_0 OP_UTXOTOKENCOMMITMENT OP_ROT OP_EQUALVERIFY OP_SWAP OP_SHA256 OP_DUP OP_EQUALVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_NIP OP_ELSE OP_ROT OP_1 OP_NUMEQUALVERIFY OP_ROT OP_SWAP OP_CHECKSIGVERIFY OP_0 OP_UTXOTOKENCATEGORY OP_EQUALVERIFY OP_0 OP_UTXOTOKENAMOUNT OP_1 OP_NUMEQUALVERIFY OP_0 OP_UTXOTOKENCOMMITMENT OP_EQUALVERIFY OP_SHA256 OP_DUP OP_EQUALVERIFY OP_TXOUTPUTCOUNT OP_1 OP_GREATERTHANOREQUAL OP_ENDIF",
+  "source": "pragma cashscript ^0.12.0;\n\ncontract MerchantRegistry(pubkey owner, bytes merchantCategory) {\n\n    function registerMerchant(\n        sig ownerSig,\n        pubkey merchantWallet,\n        bytes merchantData\n    ) {\n        require(checkSig(ownerSig, owner));\n\n        // CHIPNET CashTokens validation\n        require(tx.inputs[0].tokenCategory == merchantCategory);\n        require(tx.inputs[0].tokenAmount == 1);\n        require(tx.inputs[0].nftCommitment == merchantWallet);\n\n        // Use merchantData in a harmless way\n        bytes32 mdHash = sha256(merchantData);\n        require(mdHash == mdHash);\n\n        require(tx.outputs.length >= 1);\n    }\n\n    function approveKYC(\n        sig ownerSig,\n        pubkey merchantWallet,\n        bytes kycData\n    ) {\n        require(checkSig(ownerSig, owner));\n\n        require(tx.inputs[0].tokenCategory == merchantCategory);\n        require(tx.inputs[0].tokenAmount == 1);\n        require(tx.inputs[0].nftCommitment == merchantWallet);\n\n        // Use kycData in a harmless way\n        bytes32 kHash = sha256(kycData);\n        require(kHash == kHash);\n\n        require(tx.outputs.length >= 1);\n    }\n}\n",
   "debug": {
-    "bytecode": "78009c637b7cadc451a269787b88787b8777677c519dadc451a2697688768768",
-    "sourceMap": "13:2:20:3;;;;14:21:14:29;:31::36;:4::39:1;16:12:16:29:0;:33::34;:12:::1;:4::36;18:12:18:26:0;:30::44;:4::46:1;19:12:19:24:0;:28::40;:4::42:1;13:2:20:3;;23::28::0;;;24:4:24:39:1;25:12:25:29:0;:33::34;:12:::1;:4::36;26:12:26:44:0;:4::46:1;27:12:27:30:0;:4::32:1;10:0:29:1",
+    "bytecode": "5279009c63537a7cad00ce8800d0519d00cf7b887ca87688c451a277677b519d7b7cad00ce8800d0519d00cf88a87688c451a268",
+    "sourceMap": "5:4:22:5;;;;;10:25:10:33;;:35::40;:8::43:1;13:26:13:27:0;:16::42:1;:8::64;14:26:14:27:0;:16::40:1;:44::45:0;:8::47:1;15:26:15:27:0;:16::42:1;:46::60:0;:8::62:1;18:32:18:44:0;:25::45:1;19:16:19:32:0;:8::34:1;21:16:21:33:0;:37::38;:8::40:1;5:4:22:5;;24::40::0;;;29:25:29:33;:35::40;:8::43:1;31:26:31:27:0;:16::42:1;:8::64;32:26:32:27:0;:16::40:1;:44::45:0;:8::47:1;33:26:33:27:0;:16::42:1;:8::62;36:24:36:39;37:16:37:30:0;:8::32:1;39:16:39:33:0;:37::38;:8::40:1;3:0:41:1",
     "logs": [],
     "requires": [
       {
-        "ip": 7,
+        "ip": 10,
+        "line": 10
+      },
+      {
+        "ip": 13,
+        "line": 13
+      },
+      {
+        "ip": 17,
         "line": 14
       },
       {
-        "ip": 11,
-        "line": 16
+        "ip": 21,
+        "line": 15
       },
       {
-        "ip": 14,
-        "line": 18
-      },
-      {
-        "ip": 18,
+        "ip": 25,
         "line": 19
       },
       {
-        "ip": 23,
-        "line": 24
-      },
-      {
-        "ip": 27,
-        "line": 25
-      },
-      {
         "ip": 29,
-        "line": 26
+        "line": 21
       },
       {
-        "ip": 32,
-        "line": 27
+        "ip": 36,
+        "line": 29
+      },
+      {
+        "ip": 39,
+        "line": 31
+      },
+      {
+        "ip": 43,
+        "line": 32
+      },
+      {
+        "ip": 46,
+        "line": 33
+      },
+      {
+        "ip": 49,
+        "line": 37
+      },
+      {
+        "ip": 53,
+        "line": 39
       }
     ]
   },
@@ -87,5 +107,5 @@
     "name": "cashc",
     "version": "0.12.0"
   },
-  "updatedAt": "2025-11-22T19:40:01.896Z"
+  "updatedAt": "2025-11-23T12:50:34.729Z"
 }

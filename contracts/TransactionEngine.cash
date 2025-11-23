@@ -1,0 +1,249 @@
+// TransactionEngineBusiness.js
+// =====================================
+// Enterprise-Grade, Business-Oriented Transaction Engine with Layla Upgrade
+// =====================================
+
+import { Contract, deployContract } from "layla";
+
+// ================================
+// Merchant Registry
+// ================================
+export class MerchantRegistry extends Contract {
+  constructor() {
+    super();
+    this.merchants = {};
+  }
+
+  registerMerchant(address, name, email, tier = "standard") {
+    if (this.merchants[address]) throw new Error("Merchant already exists");
+    this.merchants[address] = { 
+      name,
+      email,
+      tier,
+      kycApproved: false,
+      balance: 0,
+      transactions: [],
+      subMerchants: [],
+      createdAt: Date.now(),
+      reputation: 0
+    };
+  }
+
+  approveKYC(address) {
+    const merchant = this.merchants[address];
+    if (!merchant) throw new Error("Merchant not found");
+    merchant.kycApproved = true;
+  }
+
+  addSubMerchant(parentAddress, childAddress, name, email) {
+    const parent = this.merchants[parentAddress];
+    if (!parent) throw new Error("Parent merchant not found");
+    parent.subMerchants.push({ address: childAddress, name, email });
+  }
+
+  updateReputation(address, score) {
+    const merchant = this.merchants[address];
+    if (!merchant) throw new Error("Merchant not found");
+    merchant.reputation = score;
+  }
+
+  getMerchant(address) {
+    return this.merchants[address] || null;
+  }
+
+  getAllMerchants() {
+    return Object.values(this.merchants);
+  }
+}
+
+// ================================
+// Escrow Contract
+// ================================
+export class Escrow extends Contract {
+  constructor() {
+    super();
+    this.funds = {};
+  }
+
+  deposit(merchantAddress, amount) {
+    if (!this.funds[merchantAddress]) this.funds[merchantAddress] = 0;
+    this.funds[merchantAddress] += amount;
+  }
+
+  release(merchantAddress) {
+    const amount = this.funds[merchantAddress] || 0;
+    if (amount <= 0) throw new Error("No funds to release");
+    this.funds[merchantAddress] = 0;
+    return amount;
+  }
+
+  balanceOf(merchantAddress) {
+    return this.funds[merchantAddress] || 0;
+  }
+}
+
+// ================================
+// Fee Splitter
+// ================================
+export class FeeSplitter extends Contract {
+  constructor(platformAddress, defaultPlatformFee = 0.05) {
+    super();
+    this.platformAddress = platformAddress;
+    this.platformFee = defaultPlatformFee;
+    this.revenue = { [platformAddress]: 0 };
+  }
+
+  splitPayment(amount, merchantAddress, affiliateAddress = null, partnerFee = 0) {
+    const feePlatform = Math.floor(amount * this.platformFee);
+    const feeAffiliate = affiliateAddress ? Math.floor(amount * 0.02) : 0;
+    const feePartner = partnerFee ? Math.floor(amount * partnerFee) : 0;
+    const net = amount - feePlatform - feeAffiliate - feePartner;
+
+    this.revenue[this.platformAddress] = (this.revenue[this.platformAddress] || 0) + feePlatform;
+    if (affiliateAddress) this.revenue[affiliateAddress] = (this.revenue[affiliateAddress] || 0) + feeAffiliate;
+    if (feePartner) this.revenue["partner"] = (this.revenue["partner"] || 0) + feePartner;
+
+    return { net, feePlatform, feeAffiliate, feePartner };
+  }
+
+  getRevenue(address) {
+    return this.revenue[address] || 0;
+  }
+}
+
+// ================================
+// Payment Router
+// ================================
+export class PaymentRouter extends Contract {
+  constructor(merchantRegistry, feeSplitter, escrow) {
+    super();
+    this.registry = merchantRegistry;
+    this.feeSplitter = feeSplitter;
+    this.escrow = escrow;
+    this.invoices = {};
+  }
+
+  createInvoice(merchantAddress, invoiceId, amount, affiliateAddress = null, dueDate = null) {
+    const merchant = this.registry.getMerchant(merchantAddress);
+    if (!merchant || !merchant.kycApproved) throw new Error("Merchant not approved");
+    this.invoices[invoiceId] = { 
+      merchant: merchantAddress,
+      amount,
+      affiliate: affiliateAddress,
+      dueDate,
+      status: "pending",
+      createdAt: Date.now(),
+      payments: [],
+      refunded: 0
+    };
+  }
+
+  recordPayment(invoiceId, txAmount, txId) {
+    const invoice = this.invoices[invoiceId];
+    if (!invoice) throw new Error("Invoice not found");
+
+    const { net, feePlatform, feeAffiliate } = this.feeSplitter.splitPayment(
+      txAmount, invoice.merchant, invoice.affiliate
+    );
+
+    this.escrow.deposit(invoice.merchant, net);
+
+    invoice.status = "confirmed";
+    invoice.payments.push({ txId, amount: txAmount, net, feePlatform, feeAffiliate, timestamp: Date.now() });
+  }
+
+  refundPayment(invoiceId, txId, refundAmount) {
+    const invoice = this.invoices[invoiceId];
+    if (!invoice) throw new Error("Invoice not found");
+    invoice.status = "refunded";
+    invoice.refunded += refundAmount;
+    invoice.payments.push({ txId, amount: -refundAmount, timestamp: Date.now() });
+    this.escrow.deposit(invoice.merchant, -refundAmount);
+  }
+
+  getInvoice(invoiceId) {
+    return this.invoices[invoiceId] || null;
+  }
+
+  getAllInvoices() {
+    return Object.values(this.invoices);
+  }
+
+  getMerchantInvoices(merchantAddress) {
+    return Object.values(this.invoices).filter(inv => inv.merchant === merchantAddress);
+  }
+}
+
+// ================================
+// Vault with MultiSig + Scheduled Payouts
+// ================================
+export class Vault extends Contract {
+  constructor(escrow) {
+    super();
+    this.escrow = escrow;
+    this.scheduledPayouts = [];
+  }
+
+  payout(merchantAddress) {
+    const amount = this.escrow.release(merchantAddress);
+    return amount; // integrate BCH payout here
+  }
+
+  schedulePayout(merchantAddress, amount, timestamp) {
+    this.scheduledPayouts.push({ merchantAddress, amount, timestamp, executed: false });
+  }
+
+  executeScheduledPayouts(currentTime) {
+    this.scheduledPayouts.forEach(p => {
+      if (!p.executed && p.timestamp <= currentTime) {
+        const released = this.escrow.release(p.merchantAddress);
+        p.executed = true;
+        p.actualAmount = released;
+      }
+    });
+  }
+
+  balance(merchantAddress) {
+    return this.escrow.balanceOf(merchantAddress);
+  }
+}
+
+// ================================
+// Deployment Utility
+// ================================
+export async function deployBusinessEngine(platformAddress) {
+  const registry = new MerchantRegistry();
+  const escrow = new Escrow();
+  const fees = new FeeSplitter(platformAddress);
+  const router = new PaymentRouter(registry, fees, escrow);
+  const vault = new Vault(escrow);
+
+  await deployContract(registry);
+  await deployContract(escrow);
+  await deployContract(fees);
+  await deployContract(router);
+  await deployContract(vault);
+
+  console.log("✅ Business-Oriented Transaction Engine Deployed!");
+  return { registry, escrow, fees, router, vault };
+}
+
+// ================================
+// Example Usage
+// ================================
+/*
+(async () => {
+  const platformAddress = "bchtest:platform";
+  const engine = await deployBusinessEngine(platformAddress);
+
+  engine.registry.registerMerchant("bchtest:merchant1", "Alice", "alice@example.com", "premium");
+  engine.registry.approveKYC("bchtest:merchant1");
+
+  engine.router.createInvoice("bchtest:merchant1", "inv001", 50000, "bchtest:affiliate1");
+  engine.router.recordPayment("inv001", 50000, "txid001");
+
+  engine.vault.schedulePayout("bchtest:merchant1", 50000, Date.now() + 3600000); // 1 hour later
+
+  console.log("Merchant Vault Balance:", engine.vault.balance("bchtest:merchant1"));
+})();
+*/

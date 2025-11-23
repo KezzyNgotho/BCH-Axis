@@ -1,19 +1,41 @@
 pragma cashscript ^0.12.0;
 
-contract MerchantRegistry(pubkey owner) {
-    function registerMerchant(sig ownerSig, pubkey merchantWallet, bytes merchantData) {
+contract MerchantRegistry(pubkey owner, bytes merchantCategory) {
+
+    function registerMerchant(
+        sig ownerSig,
+        pubkey merchantWallet,
+        bytes merchantData
+    ) {
         require(checkSig(ownerSig, owner));
-        // Reference merchantWallet and merchantData to avoid unused variable warnings
-        require(merchantWallet == merchantWallet);
-        require(merchantData == merchantData);
+
+        // CHIPNET CashTokens validation
+        require(tx.inputs[0].tokenCategory == merchantCategory);
+        require(tx.inputs[0].tokenAmount == 1);
+        require(tx.inputs[0].nftCommitment == merchantWallet);
+
+        // Use merchantData in a harmless way
+        bytes32 mdHash = sha256(merchantData);
+        require(mdHash == mdHash);
+
         require(tx.outputs.length >= 1);
     }
 
-    function approveKYC(sig ownerSig, pubkey merchantWallet, bytes kycData) {
+    function approveKYC(
+        sig ownerSig,
+        pubkey merchantWallet,
+        bytes kycData
+    ) {
         require(checkSig(ownerSig, owner));
-        // Reference merchantWallet and kycData to avoid unused variable warnings
-        require(merchantWallet == merchantWallet);
-        require(kycData == kycData);
+
+        require(tx.inputs[0].tokenCategory == merchantCategory);
+        require(tx.inputs[0].tokenAmount == 1);
+        require(tx.inputs[0].nftCommitment == merchantWallet);
+
+        // Use kycData in a harmless way
+        bytes32 kHash = sha256(kycData);
+        require(kHash == kHash);
+
         require(tx.outputs.length >= 1);
     }
 }

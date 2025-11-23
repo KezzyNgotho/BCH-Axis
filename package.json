@@ -4,10 +4,13 @@
   },
   "type": "module",
   "dependencies": {
+    "@mainnet-cash/contract": "^2.7.31",
     "@psf/bch-js": "^6.8.3",
+    "bitcore-lib-cash": "^10.10.5",
     "bitcore-mnemonic": "^10.10.7",
     "crypto-browserify": "^3.12.1",
     "dotenv": "^17.2.3",
+    "electrum-cash": "^3.2.0",
     "mainnet-js": "^2.7.31",
     "paybutton": "^0.2.1"
   }

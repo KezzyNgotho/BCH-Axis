@@ -1,27 +1,17 @@
-const BCHJS = require('@psf/bch-js');
-const bchjs = new BCHJS({ restURL: 'https://tapi.fullstack.cash/v5/' });
+import bch from "bitcore-lib-cash";
+import { Wallet } from "mainnet-js";
 
-async function main() {
-  // Generate a new 12-word mnemonic
-  const mnemonic = bchjs.Mnemonic.generate(128); // 128-bit entropy = 12 words
-  console.log('Your testnet mnemonic (SAVE THIS):', mnemonic);
+function generateWallet() {
+  // Create a random private key
+  const privateKey = new bch.PrivateKey(); // now works
+  const wif = privateKey.toWIF();
 
-  // Derive root seed from mnemonic (await because it returns a Promise)
-  const rootSeed = await bchjs.Mnemonic.toSeed(mnemonic);
+  // Instantiate Mainnet-JS wallet for Chipnet
+  const wallet = new Wallet(wif, { network: "chipnet" });
 
-  // Derive HDNode for testnet
-  const masterHDNode = bchjs.HDNode.fromSeed(rootSeed, 'testnet');
-
-  // Derive first keypair
-  const keyPair = bchjs.HDNode.toKeyPair(masterHDNode);
-  const cashAddress = bchjs.HDNode.toCashAddress(masterHDNode);
-  const legacyAddress = bchjs.HDNode.toLegacyAddress(masterHDNode);
-  const publicKey = bchjs.HDNode.toPublicKey(masterHDNode);
-
-  console.log('Cash Address (testnet):', cashAddress);
-  console.log('Legacy Address (testnet):', legacyAddress);
-  console.log('Public Key:', publicKey);
+  console.log("🔑 WIF (private key):", wif);
+  console.log("🏦 CHIPNET Address:", wallet.cashaddr);
+  console.log("📝 Public key:", wallet.publicKey);
 }
 
-// Run the async main function
-main().catch(console.error);
+generateWallet();

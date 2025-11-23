@@ -67,67 +67,72 @@ export default function MerchantOverlay({ isOpen, onClose }) {
   };
 
   const handleSubmit = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      if (!walletAddress) throw new Error("Please connect your BCH wallet.");
+  setLoading(true);
+  setError("");
+  try {
+    if (!walletAddress) throw new Error("Please connect your BCH wallet.");
 
-      // Prepare merchant data as hex string
-      const merchantDataObj = {
-        name,
-        businessEmail,
-        website,
-        phone,
-        address,
-        city,
-        state,
-        country,
-        zip,
-        xpub,
-        ts: Date.now()
-      };
-      const merchantDataHex = Array.from(
-        new TextEncoder().encode(JSON.stringify(merchantDataObj))
-      ).map(b => b.toString(16).padStart(2, "0")).join("");
+    // 1️⃣ Prepare merchant data object
+    const merchantDataObj = {
+      name,
+      businessEmail,
+      website,
+      phone,
+      address,
+      city,
+      state,
+      country,
+      zip,
+      xpub,
+      ts: Date.now()
+    };
 
-      // Simple SHA256 hash using Web Crypto API
-      const buffer = new Uint8Array(merchantDataHex.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
-      const hashBuffer = await window.crypto.subtle.digest("SHA-256", buffer);
-      const hashHex = Array.from(new Uint8Array(hashBuffer))
-        .map(b => b.toString(16).padStart(2, "0"))
-        .join("");
+    // 2️⃣ Encode as bytes (Uint8Array) for contract
+    const merchantDataBytes = new Uint8Array(
+      new TextEncoder().encode(JSON.stringify(merchantDataObj))
+    );
 
-      // Demo signature placeholder
-      const ownerSig = "demo-signature";
+    // 3️⃣ Demo signature placeholder (replace with real wallet signing if needed)
+    const ownerSig = "demo-signature";
 
-      // Pass correct arguments: (ownerSig, merchantWallet, merchantDataHex)
-      const result = await onboardMerchant(ownerSig, walletAddress, merchantDataHex);
-      setTxid(result?.txid || JSON.stringify(result));
-      // Save merchant data locally for dashboard access
-      const merchant = {
-        name,
-        businessName: name, // or add a separate field if needed
-        email: businessEmail,
-        website,
-        phone,
-        address,
-        city,
-        state,
-        country,
-        zip,
-        xpub,
-        apiKey: result?.apiKey || 'demo-api-key',
-        kycApproved,
-        txid: result?.txid || '',
-      };
-      localStorage.setItem('merchant', JSON.stringify(merchant));
-      setStep(4); // Success
-    } catch (err) {
-      setError(err?.message || "Failed to onboard merchant. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    // 4️⃣ Call the upgraded contract method
+    const result = await onboardMerchant(ownerSig, walletAddress, merchantDataBytes);
+
+    // 5️⃣ Extract transaction ID and optionally API key returned by contract
+    const txid = result?.txid || JSON.stringify(result);
+    const apiKey = result?.apiKey || "demo-api-key";
+
+    // 6️⃣ Save merchant data locally for dashboard
+    const merchant = {
+      name,
+      businessName: name, // optionally separate field
+      email: businessEmail,
+      website,
+      phone,
+      address,
+      city,
+      state,
+      country,
+      zip,
+      xpub,
+      apiKey,
+      kycApproved: false, // default until approved on-chain
+      txid
+    };
+    localStorage.setItem("merchant", JSON.stringify(merchant));
+
+    // 7️⃣ Move to next step (success)
+    setTxid(txid);
+    setStep(4);
+
+  } catch (err) {
+    console.error("Error onboarding merchant:", err);
+    setError(err?.message || "Failed to onboard merchant. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div style={{position:"fixed", inset:0, zIndex:9999, display:"flex", alignItems:"center", justifyContent:"center", background:"rgba(0,0,0,0.5)", backdropFilter:"blur(4px)"}}>
